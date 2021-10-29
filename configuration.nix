@@ -5,9 +5,7 @@
     [ 
       ./hardware-configuration.nix
       ./cli.nix
-	# Select machine's *.nix conf
-	  ./machines/desktop.nix
-	 #./machines/notebook.nix
+      ./machines/current.nix
     ];
 
 #### System
