@@ -8,53 +8,21 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/29177de0-5d89-4563-bfa2-fbd3a0c247ca";
+    { device = "/dev/disk/by-uuid/b252f50c-cf07-45ed-9489-0977ecc40789";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/A7C1-CD39";
+    { device = "/dev/disk/by-uuid/3957-CA08";
       fsType = "vfat";
     };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/3778fd7a-9970-4964-a6be-5020026794a5";
-      fsType = "ext4";
-    };
+  swapDevices = [ ];
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/b07bf65d-8c6f-4d96-9132-2caf1b795e1c"; }
-    ];
-
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  
-  boot.initrd = {
-   luks.devices."crypted-nixos" = {
-     device = "/dev/disk/by-uuid/f4228b08-3bd6-45b1-8ac2-89a791cd1b5d"; # UUID for /dev/nvme01np2 
-     keyFile = "/keyfile-root.bin";
-     allowDiscards = true;
-   };
-   luks.devices."crypted-swap" = {
-     device = "/dev/disk/by-uuid/b0b5f58a-0066-4ea1-9ced-ae58a56d2f5a"; # UUID for /dev/nvme01np3 
-     keyFile = "/keyfile-swap.bin";
-     allowDiscards = true;
-   };
-   luks.devices."crypted-home" = {
-     device = "/dev/disk/by-uuid/579ce962-9603-469e-a06f-886cf0bff293"; # UUID for /dev/sda1 
-     keyFile = "/keyfile-home.bin";
-     allowDiscards = true;
-   };
-   secrets = {
-     # Create /mnt/etc/secrets/initrd directory and copy keys to it
-     "keyfile-root.bin" = "/etc/secrets/initrd/keyfile-root.bin";
-     "keyfile-swap.bin" = "/etc/secrets/initrd/keyfile-swap.bin";
-     "keyfile-home.bin" = "/etc/secrets/initrd/keyfile-home.bin";
-   };
-  };
 }

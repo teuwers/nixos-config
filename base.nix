@@ -4,7 +4,7 @@
   imports =
     [ 
       <home-manager/nixos>
-	  ./userdirs.nix
+      ./userdirs.nix
     ];
 
   environment.systemPackages = with pkgs; [
@@ -36,12 +36,12 @@
     programs.git = {
       enable = true;
       userName  = "tyd2l";
-      userEmail = "tyd2l@protonmail.ch";
+      userEmail = "tyd2l@posteo.net";
     };
   };
  
   programs.adb.enable = true;
-  users.users.tyd2l.extraGroups = [ "adbusers" ];
+  users.extraGroups.adbusers.members = [ "tyd2l" ];
   
   services.udisks2.enable = true;
   
@@ -66,9 +66,9 @@
 #    enable = true;
 #    enableExtensionPack = true;
 #  };
-# users.users.tyd2l.extraGroups = [ "vboxusers" ];
+# users.extraGroups.vboxusers.members = [ "tyd2l" ];
   
   virtualisation.libvirtd.enable = true;
-  users.users.tyd2l.extraGroups = [ "libvirtd" ];
+  users.extraGroups.libvirtd.members = [ "tyd2l" ];
   
 }

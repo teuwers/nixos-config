@@ -1,5 +1,3 @@
-export $wllpaper = ../../wallpapers/2.png
-
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
@@ -17,7 +15,7 @@ set $menu rofi -show drun
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-output * bg $wallpaper fill
+output * bg /etc/nixos/wallpapers/2.png fill
 #
 # Example configuration:
 #
@@ -30,10 +28,10 @@ output * bg $wallpaper fill
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 120000 'swaylock -f -i $wallpaper' \
+         timeout 120000 'swaylock -f -i /etc/nixos/wallpapers/2.png' \
          timeout 110000 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -i $wallpaper'
+         before-sleep 'swaylock -f -i /etc/nixos/wallpapers/2.png'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -228,7 +226,7 @@ bindsym $mod+f11 exec brightnessctl set 5%-
 bindsym $mod+f12 exec brightnessctl set +5%
 bindsym $mod+m exec swaymsg "output * dpms off" 
 bindsym $mod+n exec swaymsg "output * dpms on"
-bindsym $mod+f7 exec swaylock -f -i $wallpaper
+bindsym $mod+f7 exec swaylock -f -i /etc/nixos/wallpapers/2.png
 
 bindsym Print exec grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
 
@@ -237,7 +235,7 @@ exec_always import-gsettings
 #bindsym $mod+f10 exec swayshot window
 #bindsym $mod+f9 exec swayshot region
 
-#exec swaylock -f -i /usr/share/backgrounds/anime_epic2.jpg
+#exec swaylock -f -i /etc/nixos/wallpapers/2.png
 
 
 ############
@@ -258,5 +256,5 @@ client.unfocused        #222222 #323232 #888888 #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
-#exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 exec mako

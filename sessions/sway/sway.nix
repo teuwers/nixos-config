@@ -5,10 +5,10 @@
     [ 
        ./sway-environment.nix
        ./waybar-config.nix
-	   ./themes.nix
+       ./themes.nix
     ];
   
-  users.users.tyd2l.extraGroups = [ "sway" ];
+  users.extraGroups.sway.members = [ "tyd2l" ];
 
   programs.sway = {
     enable = true;
@@ -52,9 +52,9 @@
       pavucontrol
       glib
       evolution-data-server
-      connmanFull
-      connman-gtk
-      connman-notify
+#      connmanFull
+#      connman-gtk
+#      connman-notify
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -69,11 +69,11 @@
 #### Apps config
 
   home-manager.users.tyd2l = { pkgs, ... }: {
-    xdg.configFile."sway/config".source = ../dot_config/sway/config;
-    xdg.configFile."rofi/config.rasi".source = ../dot_config/rofi/config.rasi;
-	xdg.configFile."rofi/themes/oxide.rasi".source = ../dot_config/rofi/themes/oxide.rasi;
-    xdg.configFile."kitty/config".source = ../dot_config/kitty/kitty.conf;
-    xdg.configFile."mako/config".source = ../dot_config/mako/config;
+    xdg.configFile."sway/config".source = ../../dot_config/sway/config;
+    xdg.configFile."rofi/config.rasi".source = ../../dot_config/rofi/config.rasi;
+    xdg.configFile."rofi/themes/oxide.rasi".source = ../../dot_config/rofi/themes/oxide.rasi;
+    xdg.configFile."kitty/config".source = ../../dot_config/kitty/kitty.conf;
+    xdg.configFile."mako/config".source = ../../dot_config/mako/config;
   };
 
 #### Environment config
@@ -86,12 +86,12 @@
     gtkUsePortal = true;
   };
   
-  services.connman = {
-    enable = true;
-    backend = "iwd";
-    networkInterfaceBlacklist = [ ];
-    extraConfig = "[General]\nAllowHostnameUpdates=false"; 
-  };
+#  services.connman = {
+#    enable = true;
+#    wifi.backend = "iwd";
+#    networkInterfaceBlacklist = [ ];
+#    extraConfig = "[General]\nAllowHostnameUpdates=false"; 
+#  };
   
   environment.systemPackages = with pkgs; [ polkit_gnome ];
   environment.pathsToLink = [ "/libexec" ];
