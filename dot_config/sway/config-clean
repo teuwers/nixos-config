@@ -1,0 +1,201 @@
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Your preferred terminal emulator
+set $term kitty
+
+# Your preferred application launcher
+set $menu rofi -show drun
+
+# Default wallpaper 
+output * bg ~/Pictures/wallpapers/1.jpg fill
+
+# Lockscreen
+exec swayidle -w \
+         timeout 120000 'swaylock -f -i ~/Pictures/wallpapers/1.jpg' \
+         timeout 110000 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -i ~/Pictures/wallpapers/1.jpg'
+
+# Touchpad config
+   input type:touchpad {
+       dwt enabled
+       tap enabled
+       natural_scroll enabled
+       middle_emulation enabled
+   }
+
+    # Start a terminal
+    bindsym $mod+Return exec $term 
+
+    # Kill focused window
+    bindsym $mod+q kill 
+
+    # Start your launcher
+    bindsym $mod+d exec $menu 
+
+    # Floating windows. Drag by holding down $mod and left mouse button.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+# Moving around:
+
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+# Workspaces:
+
+    # Switch to workspace
+    bindsym $mod+1 workspace 1
+    bindsym $mod+2 workspace 2
+    bindsym $mod+3 workspace 3
+    bindsym $mod+4 workspace 4
+    bindsym $mod+5 workspace 5
+    bindsym $mod+6 workspace 6
+    bindsym $mod+7 workspace 7
+    bindsym $mod+8 workspace 8
+    bindsym $mod+9 workspace 9
+    
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace 1
+    bindsym $mod+Shift+2 move container to workspace 2
+    bindsym $mod+Shift+3 move container to workspace 3
+    bindsym $mod+Shift+4 move container to workspace 4
+    bindsym $mod+Shift+5 move container to workspace 5
+    bindsym $mod+Shift+6 move container to workspace 6
+    bindsym $mod+Shift+7 move container to workspace 7
+    bindsym $mod+Shift+8 move container to workspace 8
+    bindsym $mod+Shift+9 move container to workspace 9
+
+# Layout stuff:
+
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith 
+    bindsym $mod+v splitv 
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed 
+    bindsym $mod+e layout toggle split 
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen 
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent 
+
+# Scratchpad:
+
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+
+# Resizing containers:
+
+mode "resize" {
+
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+include @sysconfdir@/sway/config.d/*
+
+input * {
+    xkb_layout "us,ru"
+    xkb_options "grp:caps_toggle"
+}
+
+xwayland enable
+focus_follows_mouse no
+
+for_window [class="^.*"] border none
+
+bindsym $mod+f1 exec pactl set-sink-mute 0 toggle
+bindsym $mod+f2 exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+bindsym $mod+f3 exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+
+bindsym $mod+f11 exec brightnessctl set 5%-
+bindsym $mod+f12 exec brightnessctl set +5%
+bindsym $mod+m exec swaymsg "output * dpms off" 
+bindsym $mod+n exec swaymsg "output * dpms on"
+bindsym $mod+f7 exec swaylock -f -i /usr/share/backgrounds/anime_epic2.jpg
+
+bindsym Print exec grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+
+exec_always import-gsettings
+
+#bindsym $mod+f10 exec swayshot window
+#bindsym $mod+f9 exec swayshot region
+
+#exec swaylock -f -i /usr/share/backgrounds/anime_epic2.jpg
+
+
+############
+# gaps
+default_border none
+hide_edge_borders --i3 both
+smart_borders off
+smart_gaps on
+gaps inner 4
+gaps outer -4
+
+exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+exec mako
+
+gnome_schema="org.gnome.desktop.interface"
+gtk_theme="$(grep 'gtk-theme-name' ${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini | cut -d'=' -f2)"
+icon_theme="$(grep 'gtk-icon-theme-name' "${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini | cut -d'=' -f2)"
+cursor_theme="$(grep 'gtk-cursor-theme-name' ${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini | cut -d'=' -f2)"
+font_name="$(grep 'gtk-font-name' ${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini | cut -d'=' -f2)"
+gsettings set "$gnome_schema" gtk-theme "$gtk_theme"
+gsettings set "$gnome_schema" icon-theme "$icon_theme"
+gsettings set "$gnome_schema" cursor-theme "$cursor_theme"
+gsettings set "$gnome_schema" font-name "$font_name"
