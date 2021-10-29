@@ -10,6 +10,7 @@
 
   hardware.cpu.amd.updateMicrocode = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
+  time.hardwareClockInLocalTime = true;
   
   hardware.opengl.extraPackages = with pkgs; [
    rocm-opencl-icd
@@ -29,7 +30,17 @@
     device = "nodev";
     version = 2;
     efiSupport = true;
-	timeout = 30;
+    timeout = 30;
+    extraEntries = ''
+      menuentry "Windows" {
+          insmod part_gpt
+          insmod fat
+          insmod search_fs_uuid
+          insmod chain
+          search --fs-uuid --set=root 383A-1A55
+          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+        }
+      '';
   };
   
 #### Network
