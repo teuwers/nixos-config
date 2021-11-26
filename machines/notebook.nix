@@ -14,18 +14,22 @@
   services.xserver.useGlamor = true;
   
 #### Bootloader
-    
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    version = 2;
-    efiSupport = true;
-    enableCryptodisk = true;
-	timeout = 30;
+
+  boot.loader = {
+    timeout = 30;
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
+    };
+    grub = {
+      enable = true;
+      device = "nodev";
+      version = 2;
+      efiSupport = true;
+      enableCryptodisk = true;
+    };
   };
-  
+
 #### Network
 
   networking = {

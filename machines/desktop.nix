@@ -23,24 +23,28 @@
   
 #### Bootloader
     
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    version = 2;
-    efiSupport = true;
+  boot.loader = {
     timeout = 30;
-    extraEntries = ''
-      menuentry "Windows" {
-          insmod part_gpt
-          insmod fat
-          insmod search_fs_uuid
-          insmod chain
-          search --fs-uuid --set=root 383A-1A55
-          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        }
-      '';
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
+    };
+    grub = {
+      enable = true;
+      device = "nodev";
+      version = 2;
+      efiSupport = true;
+      extraEntries = ''
+        menuentry "Windows" {
+            insmod part_gpt
+            insmod fat
+            insmod search_fs_uuid
+            insmod chain
+            search --fs-uuid --set=root 383A-1A55
+            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+          }
+        '';
+    };
   };
   
 #### Network
