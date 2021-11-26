@@ -13,6 +13,7 @@
     brave
     megasync
     tdesktop
+    spotify
  ## Security
     bitwarden
  ## Vulkan support
