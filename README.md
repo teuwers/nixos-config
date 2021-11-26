@@ -95,5 +95,18 @@ nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 nixos-install
-reboot
+```
+### If bugs with installation, do this
+```sh
+mkdir -p /mnt/mnt/etc
+cp -r /mnt/etc/secrets /mnt/mnt/etc/
+nixos-enter
+ls -al /etc
+```
+Delete all broken symlinks, then
+```sh
+nix-channel --add https://nixos.org/channels/nixos-unstable nixos
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nixos-install
 ```
