@@ -27,6 +27,7 @@
       version = 2;
       efiSupport = true;
       enableCryptodisk = true;
+      useOSProber = false;
     };
   };
 

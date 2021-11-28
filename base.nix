@@ -26,6 +26,9 @@
     simplenote
  ## USB
     unetbootin
+ ## Coding
+    gcc
+    clang
   ];
   
 #### Progs configs
