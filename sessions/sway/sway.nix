@@ -15,7 +15,7 @@
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
   ### Apps
-	  kitty
+      kitty
       evince
       gnome.gnome-calendar
       gnome.nautilus
@@ -26,13 +26,13 @@
       gnome.simple-scan
       gnome.gnome-contacts
       gnome.gnome-system-monitor
-	  celluloid
+      celluloid
       gnome.gnome-disk-utility
-	  gparted
-	  gnome.gnome-keyring
+      gparted
+      gnome.gnome-keyring
       gnome.seahorse
       transmission-gtk
-	  apostrophe
+      apostrophe
       font-manager
   ### Environment packages
       swaylock	
@@ -52,6 +52,7 @@
       pavucontrol
       glib
       evolution-data-server
+      networkmanager_dmenu
 #      connmanFull
 #      connman-gtk
 #      connman-notify
@@ -61,7 +62,7 @@
       gsettings-desktop-schemas
       gnome-themes-standard
       adwaita-qt
-	  flat-remix-icon-theme
+      flat-remix-icon-theme
       capitaine-cursors
     ];
   };
@@ -92,6 +93,12 @@
 #    networkInterfaceBlacklist = [ ];
 #    extraConfig = "[General]\nAllowHostnameUpdates=false"; 
 #  };
+
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "iwd";
+  };
+  users.extraGroups.network-manager.members = [ "tyd2l" ];
   
   environment.systemPackages = with pkgs; [ polkit_gnome ];
   environment.pathsToLink = [ "/libexec" ];
