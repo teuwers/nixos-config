@@ -53,9 +53,6 @@
       glib
       evolution-data-server
       networkmanager_dmenu
-#      connmanFull
-#      connman-gtk
-#      connman-notify
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -75,6 +72,12 @@
     xdg.configFile."rofi/themes/oxide.rasi".source = ../../dot_config/rofi/themes/oxide.rasi;
     xdg.configFile."kitty/config".source = ../../dot_config/kitty/kitty.conf;
     xdg.configFile."mako/config".source = ../../dot_config/mako/config;
+    
+    home.packages = [
+    (pkgs.writeShellScriptBin "dmenu" ''
+      exec ${pkgs.rofi}/bin/rofi -dmenu "$@"
+    '')
+    ];
   };
 
 #### Environment config
@@ -86,13 +89,6 @@
       xdg-desktop-portal-gtk ]; 
     gtkUsePortal = true;
   };
-  
-#  services.connman = {
-#    enable = true;
-#    wifi.backend = "iwd";
-#    networkInterfaceBlacklist = [ ];
-#    extraConfig = "[General]\nAllowHostnameUpdates=false"; 
-#  };
 
   networking.networkmanager = {
     enable = true;
