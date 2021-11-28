@@ -1,0 +1,3 @@
+[submodule "sessions/sway/rofi-network-manager"]
+	path = sessions/sway/rofi-network-manager
+	url = https://github.com/P3rf/rofi-network-manager

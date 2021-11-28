@@ -38,7 +38,7 @@
 
   users.users.tyd2l = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "lp" ]; 
+    extraGroups = [ "wheel" "video" "lp" "network"]; 
   };
  
 #### Bluetooth
