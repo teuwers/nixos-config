@@ -59,7 +59,7 @@
     };
   };
   
-  users.extraUsers.tyd2l.shell = pkgs.zsh;
-  users.extraUsers.root.shell = pkgs.zsh;
+  users.extraUsers.tyd2l.shell = pkgs.fish;
+  users.extraUsers.root.shell = pkgs.fish;
   
 }
