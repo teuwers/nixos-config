@@ -53,6 +53,7 @@
       glib
       evolution-data-server
       networkmanager_dmenu
+      iwgtk
   ### Interface
       gtk-engine-murrine
       gtk_engines
