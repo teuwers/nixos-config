@@ -107,7 +107,7 @@
            		    disabled = " Off ";
            	    };
            	    tooltip-format = "{}";
-           	    on-click = "connman-gtk";
+           	    on-click = "exec /etc/nixos/sessions/sway/rofi-bluetooth/rofi-bluetooth &";
             };
          };
         }

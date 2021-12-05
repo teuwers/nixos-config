@@ -53,6 +53,9 @@
       glib
       evolution-data-server
       networkmanager_dmenu
+      bluez
+      bluez-tools
+      bluez-alsa
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -101,6 +104,8 @@
   users.extraGroups.network-manager.members = [ "tyd2l" ];
   
   services.udisks2.enable = true;
+  
+  programs.kdeconnect.enable = true;
   
   environment.systemPackages = with pkgs; [ polkit_gnome ];
   environment.pathsToLink = [ "/libexec" ];

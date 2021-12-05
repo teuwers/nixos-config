@@ -13,6 +13,9 @@ set $term kitty
 # Networkmanager
 bindsym $mod+n exec networkmanager_dmenu
 
+# Bluetooth
+bindsym $mod+shift+n exec --no-startup-id /etc/nixos/sessions/sway/rofi-bluetooth/rofi-bluetooth
+
 # Power menu
 bindsym $mod+p exec rofi -show p -modi p:rofi-power-menu
 
