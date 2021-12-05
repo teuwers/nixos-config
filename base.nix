@@ -11,7 +11,6 @@
     libnotify
  ## Network
     brave
-    megasync
     tdesktop
     spotify
  ## Security
