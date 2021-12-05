@@ -10,7 +10,7 @@
 
   environment.systemPackages = with pkgs; [
     exfat
-    exfatutils
+    exfatprogs
     git
     rsync
     wget
