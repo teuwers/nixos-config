@@ -38,7 +38,9 @@
 
   users.users.tyd2l = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "lp" "network"]; 
+    extraGroups = [ "wheel" "sound" "video" "lp" "networkmanager"]; 
+    description = "Михаил Чернобров";
+    uid = 1000;
   };
  
 #### Bluetooth

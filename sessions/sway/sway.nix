@@ -80,7 +80,7 @@
     '')
     ];
   };
-
+  
 #### Environment config
 
   xdg.portal = {
@@ -96,6 +96,8 @@
     wifi.backend = "iwd";
   };
   users.extraGroups.network-manager.members = [ "tyd2l" ];
+  
+  services.udisks2.enable = true;
   
   environment.systemPackages = with pkgs; [ polkit_gnome ];
   environment.pathsToLink = [ "/libexec" ];
