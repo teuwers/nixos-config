@@ -23,8 +23,6 @@
  ## Text
     libreoffice-fresh
     simplenote
- ## USB
-    unetbootin
  ## Coding
     gcc
     clang
@@ -46,8 +44,6 @@
   programs.adb.enable = true;
   users.extraGroups.adbusers.members = [ "tyd2l" ];
   
-  services.udisks2.enable = true;
-  
 #### GUI
   
   xdg.portal = {
@@ -65,13 +61,13 @@
   
 #### Virtualisation
   
-#  virtualisation.virtualbox.host = {
-#    enable = true;
-#    enableExtensionPack = true;
-#  };
-# users.extraGroups.vboxusers.members = [ "tyd2l" ];
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+  };
+  users.extraGroups.vboxusers.members = [ "tyd2l" ];
   
-  virtualisation.libvirtd.enable = true;
-  users.extraGroups.libvirtd.members = [ "tyd2l" ];
+#  virtualisation.libvirtd.enable = true;
+#  users.extraGroups.libvirtd.members = [ "tyd2l" ];
   
 }

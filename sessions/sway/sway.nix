@@ -53,7 +53,6 @@
       glib
       evolution-data-server
       networkmanager_dmenu
-      iwgtk
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -62,6 +61,7 @@
       adwaita-qt
       flat-remix-icon-theme
       capitaine-cursors
+      rofi-power-menu
     ];
   };
   
@@ -75,9 +75,12 @@
     xdg.configFile."mako/config".source = ../../dot_config/mako/config;
     
     home.packages = [
-    (pkgs.writeShellScriptBin "dmenu" ''
+      (pkgs.writeShellScriptBin "dmenu" ''
       exec ${pkgs.rofi}/bin/rofi -dmenu "$@"
-    '')
+      '')
+      (pkgs.writeShellScriptBin "xterm" ''
+      exec ${pkgs.kitty}/bin/kitty "$@"
+      '')
     ];
   };
   

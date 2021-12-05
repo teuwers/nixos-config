@@ -27,12 +27,14 @@
 #### Timezone and locale
 
   time.timeZone = "Europe/Moscow";
-  i18n.defaultLocale = "ru_RU.UTF-8";
-  i18n.glibcLocales = pkgs.glibcLocales;
-  i18n.supportedLocales = 
-  [  "ru_RU.UTF-8/UTF-8"
-     "en_US.UTF-8/UTF-8"
-  ];
+  i18n = {
+    glibcLocales = pkgs.glibcLocales;
+    defaultLocale = "ru_RU.UTF-8";
+    supportedLocales = 
+    [  "ru_RU.UTF-8/UTF-8"
+       "en_US.UTF-8/UTF-8"
+    ];
+  };
   
 #### User account
 

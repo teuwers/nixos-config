@@ -44,7 +44,8 @@
 #### Console
 
   console = {
-    font = "cyr-sun16";
+    earlySetup = true;
+    font = "Lat2-Terminus16";
     keyMap = "ru";
   };
 

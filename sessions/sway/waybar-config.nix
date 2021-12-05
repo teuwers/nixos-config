@@ -75,7 +75,7 @@
                  interface = "wlan0";
                  format-wifi = " {essid}";
                  format-disconnected = "⚠ Disconnected";
-                 on-click = "iwgtk";
+                 on-click = "networkmanager_dmenu";
              };
              
              "pulseaudio" = {

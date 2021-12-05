@@ -1,3 +1,6 @@
 [submodule "sessions/sway/rofi-network-manager"]
 	path = sessions/sway/rofi-network-manager
 	url = https://github.com/P3rf/rofi-network-manager
+[submodule "sessions/sway/rofi-bluetooth"]
+	path = sessions/sway/rofi-bluetooth
+	url = https://github.com/ClydeDroid/rofi-bluetooth

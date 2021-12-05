@@ -1,47 +1,34 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred terminal emulator
 set $term kitty
+
+# Networkmanager
+bindsym $mod+n exec networkmanager_dmenu
+
+# Power menu
+bindsym $mod+p exec rofi -show p -modi p:rofi-power-menu
+
 # Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
 set $menu rofi -show drun
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
+# Wallpaper
 output * bg /etc/nixos/wallpapers/2.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
 
-### Idle configuration
-#
-# Example configuration:
-#
 exec swayidle -w \
          timeout 120000 'swaylock -f -i /etc/nixos/wallpapers/2.png' \
          timeout 110000 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -i /etc/nixos/wallpapers/2.png'
 
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-   input type:touchpad {
+input type:touchpad {
        dwt enabled
        tap enabled
        natural_scroll enabled
@@ -52,9 +39,7 @@ exec swayidle -w \
 # Read `man 5 sway-input` for more information about this section.
 
 ### Key bindings
-#
-# Basics:
-#
+
     # Start a terminal
     bindsym $mod+Return exec $term 
 
@@ -224,8 +209,8 @@ bindsym $mod+f3 exec pactl set-sink-volume @DEFAULT_SINK@ +1%
 
 bindsym $mod+f11 exec brightnessctl set 5%-
 bindsym $mod+f12 exec brightnessctl set +5%
-bindsym $mod+m exec swaymsg "output * dpms off" 
-bindsym $mod+n exec swaymsg "output * dpms on"
+#bindsym $mod+m exec swaymsg "output * dpms off" 
+#bindsym $mod+n exec swaymsg "output * dpms on"
 bindsym $mod+f7 exec swaylock -f -i /etc/nixos/wallpapers/2.png
 
 bindsym Print exec grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
