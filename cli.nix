@@ -9,8 +9,6 @@
 #### Packages
 
   environment.systemPackages = with pkgs; [
-    exfat
-    exfatprogs
     git
     rsync
     wget

@@ -9,6 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     libnotify
+    mtpfs
  ## Network
     brave
     tdesktop

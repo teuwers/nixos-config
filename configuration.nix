@@ -13,6 +13,7 @@
   system.stateVersion = "unstable";
   services.fwupd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelModules = [ "exfat-nofuse" ];
   nixpkgs.config.allowUnfree = true;
   
 #### Remove old generations
