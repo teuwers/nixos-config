@@ -13,7 +13,6 @@
   system.stateVersion = "unstable";
   services.fwupd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelModules = [ "exfat-nofuse" ];
   nixpkgs.config.allowUnfree = true;
   
 #### Remove old generations
@@ -36,6 +35,8 @@
        "en_US.UTF-8/UTF-8"
     ];
   };
+  
+  services.ntp.enable = true;
   
 #### User account
 
@@ -62,9 +63,9 @@
 
   sound.enable = true;
   services.pipewire = {
-  enable = true;
-  alsa.enable = true;
-  pulse.enable = true;
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
   };
  
 #### Printing

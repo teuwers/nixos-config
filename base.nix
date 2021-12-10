@@ -10,6 +10,9 @@
   environment.systemPackages = with pkgs; [
     libnotify
     mtpfs
+    jmtpfs
+    exfat
+    exfatprogs
  ## Network
     brave
     tdesktop
@@ -62,11 +65,11 @@
   
 #### Virtualisation
   
-  virtualisation.virtualbox.host = {
-    enable = true;
-    enableExtensionPack = true;
-  };
-  users.extraGroups.vboxusers.members = [ "tyd2l" ];
+#  virtualisation.virtualbox.host = {
+#    enable = true;
+#    enableExtensionPack = true;
+#  };
+#  users.extraGroups.vboxusers.members = [ "tyd2l" ];
   
 #  virtualisation.libvirtd.enable = true;
 #  users.extraGroups.libvirtd.members = [ "tyd2l" ];

@@ -39,14 +39,15 @@
     interfaces.wlan0.useDHCP = true;
     wireless.iwd.enable = true;
     };
+
+#### OpenGL drivers
+
+  hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = with pkgs; [
+    vaapiIntel
+    vaapiVdpau
+    libvdpau-va-gl
+  ];
   
-#  networking.networkmanager = {
-#    enable = true;
-#    dns = "systemd-resolved";
-#    wifi = {
-#      backend = "iwd";
-#      powersave = true;
-#    };
-#  };  
-# users.users.tyd2l.extraGroups = [ "networkmanager" ];
+  powerManagement.enable = true;
 }
