@@ -1,4 +1,4 @@
-# nixos-dotfiles
+# nixos-config
 My dotfiles for NixOS setup
 
 # Installation
