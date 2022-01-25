@@ -42,6 +42,11 @@
       enable = true;
       userName  = "tyd2l";
       userEmail = "tyd2l@posteo.net";
+      extraConfig = {
+        credential.helper = "${
+          pkgs.git.override { withLibsecret = true; }
+          }/bin/git-credential-libsecret";
+      };
     };
   };
  

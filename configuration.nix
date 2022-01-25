@@ -10,7 +10,7 @@
 
 #### System
 
-  system.stateVersion = "unstable";
+  system.stateVersion = "21.11";
   services.fwupd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
   nixpkgs.config.allowUnfree = true;
