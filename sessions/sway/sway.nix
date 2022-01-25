@@ -34,6 +34,7 @@
       transmission-gtk
       apostrophe
       font-manager
+      pcmanfm-qt
   ### Environment packages
       swaylock	
       swayidle
@@ -76,6 +77,7 @@
     xdg.configFile."rofi/themes/oxide.rasi".source = ../../dot_config/rofi/themes/oxide.rasi;
     xdg.configFile."kitty/config".source = ../../dot_config/kitty/kitty.conf;
     xdg.configFile."mako/config".source = ../../dot_config/mako/config;
+    xdg.configFile."qt5ct/qt5ct.conf".source = ../../dot_config/qt5ct/qt5ct.conf;
     
     home.packages = [
       (pkgs.writeShellScriptBin "dmenu" ''
@@ -107,6 +109,10 @@
   
   programs.kdeconnect.enable = true;
   
+  environment.sessionVariables = 
+  {
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+  };
   environment.systemPackages = with pkgs; [ polkit_gnome ];
   environment.pathsToLink = [ "/libexec" ];
   programs.dconf.enable = true;

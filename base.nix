@@ -13,6 +13,7 @@
     jmtpfs
     exfat
     exfatprogs
+    jre8
  ## Network
     brave
     tdesktop
@@ -30,6 +31,7 @@
  ## Coding
     gcc
     clang
+    pkgs.gitAndTools.gitFull
   ];
   
 #### Progs configs
@@ -43,9 +45,7 @@
       userName  = "tyd2l";
       userEmail = "tyd2l@posteo.net";
       extraConfig = {
-        credential.helper = "${
-          pkgs.git.override { withLibsecret = true; }
-          }/bin/git-credential-libsecret";
+        credential.helper = "cache --timeout=36000";
       };
     };
   };
