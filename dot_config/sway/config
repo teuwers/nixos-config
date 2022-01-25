@@ -23,13 +23,13 @@ bindsym $mod+p exec rofi -show p -modi p:rofi-power-menu
 set $menu rofi -show drun
 
 # Wallpaper
-output * bg /etc/nixos/wallpapers/2.png fill
+output * bg /etc/nixos/wallpapers/5.jpg fill
 
 exec swayidle -w \
-         timeout 120000 'swaylock -f -i /etc/nixos/wallpapers/2.png' \
+         timeout 120000 'swaylock -f -i /etc/nixos/wallpapers/5.jpg' \
          timeout 110000 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -i /etc/nixos/wallpapers/2.png'
+         before-sleep 'swaylock -f -i /etc/nixos/wallpapers/5.jpg'
 
 input type:touchpad {
        dwt enabled
@@ -214,7 +214,7 @@ bindsym $mod+f11 exec brightnessctl set 5%-
 bindsym $mod+f12 exec brightnessctl set +5%
 #bindsym $mod+m exec swaymsg "output * dpms off" 
 #bindsym $mod+n exec swaymsg "output * dpms on"
-bindsym $mod+f7 exec swaylock -f -i /etc/nixos/wallpapers/2.png
+bindsym $mod+f7 exec swaylock -f -i /etc/nixos/wallpapers/5.jpg
 
 bindsym Print exec grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
 

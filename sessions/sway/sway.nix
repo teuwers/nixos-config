@@ -34,7 +34,7 @@
       transmission-gtk
       apostrophe
       font-manager
-      pcmanfm-qt
+      gimp-with-plugins
   ### Environment packages
       swaylock	
       swayidle
@@ -64,7 +64,6 @@
       gnome-themes-standard
       adwaita-qt
       flat-remix-icon-theme
-      capitaine-cursors
       rofi-power-menu
     ];
   };
