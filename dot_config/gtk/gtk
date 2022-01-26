@@ -1,0 +1,10 @@
+[Settings]
+gtk-application-prefer-dark-theme=1
+gtk-cursor-theme-name=capitaine-cursors-white
+gtk-font-name=Noto Sans
+gtk-icon-theme-name=Flat-Remix-Blue-Dark
+gtk-theme-name=Adwaita-dark
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle=hintfull
+gtk-xft-rgba=rgb

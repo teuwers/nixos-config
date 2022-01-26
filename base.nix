@@ -13,7 +13,6 @@
     jmtpfs
     exfat
     exfatprogs
-    jre8
  ## Network
     brave
     tdesktop

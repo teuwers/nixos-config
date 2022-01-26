@@ -5,7 +5,7 @@
     [ 
        ./sway-environment.nix
        ./waybar-config.nix
-       ./themes.nix
+       #./themes.nix
     ];
   
   users.extraGroups.sway.members = [ "tyd2l" ];
@@ -64,6 +64,7 @@
       gnome-themes-standard
       adwaita-qt
       flat-remix-icon-theme
+      capitaine-cursors
       rofi-power-menu
     ];
   };
@@ -77,6 +78,9 @@
     xdg.configFile."kitty/config".source = ../../dot_config/kitty/kitty.conf;
     xdg.configFile."mako/config".source = ../../dot_config/mako/config;
     xdg.configFile."qt5ct/qt5ct.conf".source = ../../dot_config/qt5ct/qt5ct.conf;
+    xdg.configFile."../.gtkrc-2.0".source = ../../dot_config/gtk/gtk;
+    xdg.configFile."gtk-3.0/settings.ini".source = ../../dot_config/gtk/gtk;
+    xdg.configFile."gtk-4.0/settings.ini".source = ../../dot_config/gtk/gtk;
     
     home.packages = [
       (pkgs.writeShellScriptBin "dmenu" ''
@@ -86,7 +90,17 @@
       exec ${pkgs.kitty}/bin/kitty "$@"
       '')
     ];
+    xsession = {
+      enable = true;
+      pointerCursor = {
+        size = 40;
+        package = pkgs.capitaine-cursors;
+        name = "capitaine-cursors-white";
+      };
+    };
   };
+  
+  programs.qt5ct.enable = true;
   
 #### Environment config
 
@@ -111,6 +125,7 @@
   environment.sessionVariables = 
   {
     QT_QPA_PLATFORMTHEME = "qt5ct";
+    XCURSOR_THEME = "capitaine-cursors-white";
   };
   environment.systemPackages = with pkgs; [ polkit_gnome ];
   environment.pathsToLink = [ "/libexec" ];

@@ -15,7 +15,8 @@
       templates = "\$HOME/Templates";
       videos = "\$HOME/Videos";
     };
-	
+
+    gtk.enable = true;	
     gtk.gtk3.bookmarks = 
     [ 
       "file:///home/tyd2l/Audios"
