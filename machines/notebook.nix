@@ -3,9 +3,10 @@
 {
   imports =
     [ 
+      ../target/pc.nix
 	# Choose WM/DE
-      ../sessions/sway/sway.nix
-	  ../sessions/sway/sway-notebook.nix
+      ../sessions/sway.nix
+      ../sessions/sway-notebook.nix
       #../sessions/gnome.nix
     ];
 

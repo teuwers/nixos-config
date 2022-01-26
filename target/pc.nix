@@ -4,7 +4,6 @@
   imports =
     [ 
       <home-manager/nixos>
-      ./userdirs.nix
     ];
 
   environment.systemPackages = with pkgs; [
@@ -21,9 +20,8 @@
     bitwarden
  ## Vulkan support
     vulkan-headers
-    vulkan-tools-lunarg
     vulkan-loader
-    vulkan-extension-layer
+   # vulkan-extension-layer
  ## Text
     libreoffice-fresh
     simplenote

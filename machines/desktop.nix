@@ -3,9 +3,11 @@
 {
   imports =
     [ 
+      ../target/pc.nix
 	# Choose WM/DE
-      ../sessions/sway/sway.nix
+      ../sessions/sway.nix
       #../sessions/gnome.nix
+      #../sessions/plasma.nix
     ];
 
   hardware.cpu.amd.updateMicrocode = true;

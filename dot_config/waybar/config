@@ -1,0 +1,107 @@
+[
+  {
+    "backlight": {
+      "format": "{icon} {percent}%",
+      "format-icons": [
+        ""
+      ],
+      "on-click": "brightnessctl s 50%",
+      "on-scroll-down": "brightnessctl s 5%-",
+      "on-scroll-up": "brightnessctl s 5%+"
+    },
+    "battery": {
+      "format": "{icon} {capacity}%",
+      "format-icons": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "states": {
+        "critical": 15,
+        "good": 95,
+        "warning": 30
+      }
+    },
+    "bluetooth": {
+      "format": "{icon}",
+      "format-icons": {
+        "disabled": " Off ",
+        "enabled": " On "
+      },
+      "on-click": "exec /etc/nixos/sessions/sway/rofi-bluetooth/rofi-bluetooth &",
+      "tooltip-format": "{}"
+    },
+    "clock": {
+      "format": " {:%a %d %b %H:%M}",
+      "interval": 1,
+      "on-click": "exec gnome-calendar",
+      "tooltip-format": "{:%A %B %d %Y | %H:%M}"
+    },
+    "custom/shutdown": {
+      "format": " ⏻ ",
+      "on-click": "exec wlogout"
+    },
+    "height": 30,
+    "layer": "top",
+    "modules-center": [],
+    "modules-left": [
+      "sway/workspaces",
+      "sway/mode",
+      "sway/window"
+    ],
+    "modules-right": [
+      "sway/language",
+      "backlight",
+      "battery",
+      "network",
+      "bluetooth",
+      "pulseaudio",
+      "tray",
+      "clock",
+      "custom/shutdown"
+    ],
+    "network": {
+      "format-disconnected": "⚠ Disconnected",
+      "format-wifi": " {essid}",
+      "interface": "wlan0",
+      "on-click": "networkmanager_dmenu"
+    },
+    "position": "top",
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-bluetooth": "{icon} {volume}%",
+      "format-icons": {
+        "car": "",
+        "default": [
+          "",
+          ""
+        ],
+        "handsfree": "",
+        "headphones": "",
+        "headset": "",
+        "phone": "",
+        "portable": ""
+      },
+      "format-muted": "muted",
+      "on-click": "pavucontrol",
+      "scroll-step": 5
+    },
+    "sway/mode": {
+      "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/window": {
+      "format": "{}"
+    },
+    "sway/workspaces": {
+      "all-outputs": true,
+      "disable-scroll": true,
+      "format": "{icon}"
+    },
+    "tray": {
+      "icon-size": 14,
+      "spacing": 5
+    }
+  }
+]

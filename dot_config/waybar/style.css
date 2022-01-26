@@ -1,9 +1,4 @@
-{ config, pkgs, ... }:
 
-{
-  home-manager.users.tyd2l = { pkgs, ... }: {
-  
-    programs.waybar.style = "
     * {
          border: none;
          border-radius: 0;
@@ -100,7 +95,4 @@
         animation-direction: alternate;
     }
     
-    ";
-      
-  };  
-} 
+    

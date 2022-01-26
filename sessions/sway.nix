@@ -1,13 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ 
-       ./sway-environment.nix
-       ./waybar-config.nix
-       #./themes.nix
-    ];
-  
   users.extraGroups.sway.members = [ "tyd2l" ];
 
   programs.sway = {
@@ -35,6 +28,8 @@
       apostrophe
       font-manager
       gimp-with-plugins
+      gnome-online-accounts
+      gnome.gnome-control-center
   ### Environment packages
       swaylock	
       swayidle
@@ -66,21 +61,35 @@
       flat-remix-icon-theme
       capitaine-cursors
       rofi-power-menu
+      themechanger
     ];
   };
   
 #### Apps config
 
   home-manager.users.tyd2l = { pkgs, ... }: {
-    xdg.configFile."sway/config".source = ../../dot_config/sway/config;
-    xdg.configFile."rofi/config.rasi".source = ../../dot_config/rofi/config.rasi;
-    xdg.configFile."rofi/themes/oxide.rasi".source = ../../dot_config/rofi/themes/oxide.rasi;
-    xdg.configFile."kitty/config".source = ../../dot_config/kitty/kitty.conf;
-    xdg.configFile."mako/config".source = ../../dot_config/mako/config;
-    xdg.configFile."qt5ct/qt5ct.conf".source = ../../dot_config/qt5ct/qt5ct.conf;
-    xdg.configFile."../.gtkrc-2.0".source = ../../dot_config/gtk/gtk;
-    xdg.configFile."gtk-3.0/settings.ini".source = ../../dot_config/gtk/gtk;
-    xdg.configFile."gtk-4.0/settings.ini".source = ../../dot_config/gtk/gtk;
+  
+    xdg.userDirs = {
+      enable = true;
+      createDirectories = true;
+      desktop = "\$HOME/Desktop";
+      documents = "\$HOME/Docs";
+      download = "\$HOME/Downloads";
+      music = "\$HOME/Audios";
+      pictures = "\$HOME/Images";
+      publicShare = "\$HOME/Public";
+      templates = "\$HOME/Templates";
+      videos = "\$HOME/Videos";
+    };
+    
+    xdg.configFile."sway/config".source = ../dot_config/sway/config;
+    xdg.configFile."rofi/config.rasi".source = ../dot_config/rofi/config.rasi;
+    xdg.configFile."rofi/themes/oxide.rasi".source = ../dot_config/rofi/themes/oxide.rasi;
+    xdg.configFile."kitty/kitty.conf".source = ../dot_config/kitty/kitty.conf;
+    xdg.configFile."mako/config".source = ../dot_config/mako/config;
+    xdg.configFile."waybar/config".source = ../dot_config/waybar/config;
+    xdg.configFile."waybar/style.css".source = ../dot_config/waybar/style.css;
+    xdg.configFile."qt5ct/qt5ct.conf".source = ../dot_config/qt5ct/qt5ct.conf;
     
     home.packages = [
       (pkgs.writeShellScriptBin "dmenu" ''
@@ -90,12 +99,47 @@
       exec ${pkgs.kitty}/bin/kitty "$@"
       '')
     ];
+    
     xsession = {
       enable = true;
       pointerCursor = {
         size = 40;
         package = pkgs.capitaine-cursors;
         name = "capitaine-cursors-white";
+      };
+    };
+    
+    gtk = {
+      enable = true;
+      font.name = "Noto Sans";
+      iconTheme.name = "Flat-Remix-Blue-Dark";
+      theme.name = "Adwaita-dark";
+      gtk3.bookmarks = 
+        [ 
+          "file:///home/tyd2l/Audios"
+          "file:///home/tyd2l/Docs"
+          "file:///home/tyd2l/Downloads"
+          "file:///home/tyd2l/Images"
+          "file:///home/tyd2l/Videos"
+          "file:///etc/nixos"
+        ];  
+      gtk3.extraConfig = 
+      {
+        gtk-xft-antialias = "1";
+        gtk-xft-hinting = "1";
+        gtk-xft-hintstyle = "hintfull";
+        gtk-xft-rgba = "rgb";
+        gtk-cursor-theme-name = "capitaine-cursors-white";
+        gtk-application-prefer-dark-theme = "1";
+      };
+      gtk4.extraConfig = 
+      {
+        gtk-xft-antialias = "1";
+        gtk-xft-hinting = "1";
+        gtk-xft-hintstyle = "hintfull";
+        gtk-xft-rgba = "rgb";
+        gtk-cursor-theme-name = "capitaine-cursors-white";
+        gtk-application-prefer-dark-theme = "1";
       };
     };
   };
