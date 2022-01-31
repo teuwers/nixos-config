@@ -29,7 +29,7 @@
       font-manager
       gimp-with-plugins
       gnome-online-accounts
-      gnome.gnome-control-center
+      mpv
   ### Environment packages
       swaylock	
       swayidle
@@ -61,7 +61,7 @@
       flat-remix-icon-theme
       capitaine-cursors
       rofi-power-menu
-      themechanger
+      iosevka
     ];
   };
   
@@ -90,6 +90,7 @@
     xdg.configFile."waybar/config".source = ../dot_config/waybar/config;
     xdg.configFile."waybar/style.css".source = ../dot_config/waybar/style.css;
     xdg.configFile."qt5ct/qt5ct.conf".source = ../dot_config/qt5ct/qt5ct.conf;
+    xdg.configFile."mpv".source = ../dot_config/mpv;
     
     home.packages = [
       (pkgs.writeShellScriptBin "dmenu" ''

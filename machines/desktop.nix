@@ -23,6 +23,11 @@
     driversi686Linux.amdvlk
   ];
   
+  hardware.logitech.wireless = {
+    enable = true;
+    enableGraphical = true;
+  };
+  
 #### Bootloader
     
   boot.loader = {
