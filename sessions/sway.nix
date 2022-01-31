@@ -61,7 +61,6 @@
       flat-remix-icon-theme
       capitaine-cursors
       rofi-power-menu
-      iosevka
     ];
   };
   
