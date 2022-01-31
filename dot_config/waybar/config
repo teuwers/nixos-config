@@ -36,7 +36,7 @@
     "clock": {
       "format": " {:%a %d %b %H:%M}",
       "interval": 1,
-      "on-click": "exec gnome-calendar",
+      "on-click": "exec thunderbird",
       "tooltip-format": "{:%A %B %d %Y | %H:%M}"
     },
     "custom/shutdown": {

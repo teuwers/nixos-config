@@ -10,25 +10,19 @@
   ### Apps
       kitty
       evince
-      gnome.gnome-calendar
       gnome.nautilus
       gnome.file-roller
       gnome.gedit
       gnome.eog
       gnome.zenity
       gnome.simple-scan
-      gnome.gnome-contacts
-      gnome.gnome-system-monitor
-      celluloid
       gnome.gnome-disk-utility
+      thunderbird-wayland
       gparted
-      gnome.gnome-keyring
-      gnome.seahorse
       transmission-gtk
       apostrophe
       font-manager
       gimp-with-plugins
-      gnome-online-accounts
       mpv
   ### Environment packages
       swaylock	
