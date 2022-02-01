@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, stdenv, fetchFromGitHub, ... }:
 
 {
+#  environment.systemPackages = let themes = pkgs.callPackage ./sddm-themes.nix; in
+#    [ themes.sddm-slice ];
+
   users.extraGroups.sway.members = [ "tyd2l" ];
 
   programs.sway = {
@@ -45,6 +48,9 @@
       bluez
       bluez-tools
       bluez-alsa
+      trash-cli
+      nix-prefetch-git
+      libsForQt5.qt5.qtgraphicaleffects
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -52,9 +58,8 @@
       gnome-themes-standard
       adwaita-qt
       flat-remix-icon-theme
-      capitaine-cursors
+#      capitaine-cursors
       rofi-power-menu
-      lightdm-tiny-greeter
     ];
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
@@ -99,18 +104,15 @@
       (pkgs.writeShellScriptBin "xterm" ''
       exec ${pkgs.kitty}/bin/kitty "$@"
       '')
-#      (pkgs.writeShellScriptBin "brave" ''
-#      exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"
-#      '')
     ];
     
     xsession = {
       enable = true;
-      pointerCursor = {
-        size = 40;
-        package = pkgs.capitaine-cursors;
-        name = "capitaine-cursors-white";
-      };
+#      pointerCursor = {
+#        size = 40;
+#        package = pkgs.capitaine-cursors;
+#        name = "capitaine-cursors-white";
+#      };
     };
     
     gtk = {
@@ -133,7 +135,7 @@
         gtk-xft-hinting = "1";
         gtk-xft-hintstyle = "hintfull";
         gtk-xft-rgba = "rgb";
-        gtk-cursor-theme-name = "capitaine-cursors-white";
+#        gtk-cursor-theme-name = "capitaine-cursors-white";
         gtk-application-prefer-dark-theme = "1";
       };
       gtk4.extraConfig = 
@@ -142,7 +144,7 @@
         gtk-xft-hinting = "1";
         gtk-xft-hintstyle = "hintfull";
         gtk-xft-rgba = "rgb";
-        gtk-cursor-theme-name = "capitaine-cursors-white";
+#        gtk-cursor-theme-name = "capitaine-cursors-white";
         gtk-application-prefer-dark-theme = "1";
       };
     };
@@ -173,7 +175,7 @@
   environment.sessionVariables = 
   {
     QT_QPA_PLATFORMTHEME = "qt5ct";
-    XCURSOR_THEME = "capitaine-cursors-white";
+#    XCURSOR_THEME = "capitaine-cursors-white";
   };
 #  environment.systemPackages = with pkgs; [ polkit_gnome ];
   environment.pathsToLink = [ "/libexec" ];
@@ -229,5 +231,11 @@
   services.xserver.libinput.enable = true;
   services.xserver.displayManager.defaultSession = "sway";
   services.xserver.displayManager.sddm.enable = true;
-#  services.xserver.displayManager.sddm.theme = "
+  services.xserver.displayManager.sddm.enableHidpi = true;
+  services.xserver.displayManager.sddm.theme = "${(pkgs.fetchFromGitHub {
+    owner = "RadRussianRus";
+    repo = "sddm-slice";
+    rev = "1ddbc490a500bdd938a797e72a480f535191b45e";
+    sha256 = "0b2ga0f4z61h7hfip2clfqdvr6friix1a8q6laiklfq7d4rm236l";
+  })}";
 } 

@@ -6,15 +6,15 @@ anchor=top-right
 
 font=Noto Sans
 background-color=#202020BB
-#text-color=#f3f99dFF
+text-color=#f3f99dFF
 width=400
 height=100
 margin=10
 padding=5
 border-size=1
-border-color=#f3f99dBB
+border-color=#ffffff
 border-radius=5
-progress-color=over #5588AAFF
+progress-color=#5588AAFF
 icons=true
 max-icon-size=64
 
@@ -25,5 +25,5 @@ default-timeout=6000
 ignore-timeout=false
 
 [urgency=high]
-#text-color=#ff5c57FF
-border-color=#ff5c57BB
+text-color=#ff5c57FF
+border-color=#ffffff
