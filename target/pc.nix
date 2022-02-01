@@ -13,7 +13,8 @@
     exfat
     exfatprogs
  ## Network
-    brave
+    firefox-wayland
+    thunderbird-wayland
     tdesktop
     spotify
  ## Security

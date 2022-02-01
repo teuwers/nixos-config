@@ -17,7 +17,6 @@
       gnome.zenity
       gnome.simple-scan
       gnome.gnome-disk-utility
-      thunderbird-wayland
       gparted
       transmission-gtk
       apostrophe
@@ -55,7 +54,15 @@
       flat-remix-icon-theme
       capitaine-cursors
       rofi-power-menu
+      lightdm-tiny-greeter
     ];
+    extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      export MOZ_ENABLE_WAYLAND=1
+#      export _JAVA_AWT_WM_NONREPARENTING=1
+    '';
   };
   
 #### Apps config
@@ -92,6 +99,9 @@
       (pkgs.writeShellScriptBin "xterm" ''
       exec ${pkgs.kitty}/bin/kitty "$@"
       '')
+#      (pkgs.writeShellScriptBin "brave" ''
+#      exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"
+#      '')
     ];
     
     xsession = {
@@ -165,8 +175,59 @@
     QT_QPA_PLATFORMTHEME = "qt5ct";
     XCURSOR_THEME = "capitaine-cursors-white";
   };
-  environment.systemPackages = with pkgs; [ polkit_gnome ];
+#  environment.systemPackages = with pkgs; [ polkit_gnome ];
   environment.pathsToLink = [ "/libexec" ];
   programs.dconf.enable = true;
   services.gvfs.enable = true;
+  
+  # Here we but a shell script into path, which lets us start sway.service (after importing the environment of the login shell).
+  environment.systemPackages = with pkgs; [
+    (
+      pkgs.writeTextFile {
+        name = "startsway";
+        destination = "/bin/startsway";
+        executable = true;
+        text = ''
+          #! ${pkgs.bash}/bin/bash
+
+          # first import environment variables from the login manager
+          systemctl --user import-environment
+          # then start the service
+          exec systemctl --user start sway.service
+        '';
+      }
+    )
+    polkit_gnome
+  ];
+
+  systemd.user.targets.sway-session = {
+    description = "Sway compositor session";
+    documentation = [ "man:systemd.special(7)" ];
+    bindsTo = [ "graphical-session.target" ];
+    wants = [ "graphical-session-pre.target" ];
+    after = [ "graphical-session-pre.target" ];
+  };
+
+  systemd.user.services.sway = {
+    description = "Sway - Wayland window manager";
+    documentation = [ "man:sway(5)" ];
+    bindsTo = [ "graphical-session.target" ];
+    wants = [ "graphical-session-pre.target" ];
+    after = [ "graphical-session-pre.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = ''
+        ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --debug
+      '';
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
+  
+  services.xserver.enable = true;
+  services.xserver.libinput.enable = true;
+  services.xserver.displayManager.defaultSession = "sway";
+  services.xserver.displayManager.sddm.enable = true;
+#  services.xserver.displayManager.sddm.theme = "
 } 
