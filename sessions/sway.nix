@@ -1,9 +1,6 @@
 { config, pkgs, stdenv, fetchFromGitHub, ... }:
 
 {
-#  environment.systemPackages = let themes = pkgs.callPackage ./sddm-themes.nix; in
-#    [ themes.sddm-slice ];
-
   users.extraGroups.sway.members = [ "tyd2l" ];
 
   programs.sway = {
@@ -12,15 +9,14 @@
     extraPackages = with pkgs; [
   ### Apps
       kitty
-      evince
-      gnome.gedit
-      libsForQt5.kate
+      libsForQt5.okular
+      libsForQt5.ktexteditor
       libsForQt5.kdialog
       transmission-qt
       ghostwriter
       font-manager
       skanlite
-      gimp-with-plugins
+      krita
       mpv
       pcmanfm-qt
       lxqt.lxqt-archiver
@@ -28,7 +24,6 @@
       lxqt.qps
       lxqt.lximage-qt
       lxqt.pavucontrol-qt
-      qsudo
   ### Environment packages
       swaylock	
       swayidle
