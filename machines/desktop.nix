@@ -59,7 +59,7 @@
   networking = {
     hostName = "mike-desktop";
     interfaces.wlan0.useDHCP = true;
-    wireless.iwd.enable = true;
+#    wireless.iwd.enable = true;
     };
   
 #  networking.networkmanager = {

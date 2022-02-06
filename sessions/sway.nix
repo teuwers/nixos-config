@@ -10,7 +10,7 @@
   ### Apps
       kitty
       libsForQt5.okular
-      libsForQt5.ktexteditor
+      gnome.gedit
       libsForQt5.kdialog
       transmission-qt
       ghostwriter
@@ -92,6 +92,12 @@
     xdg.configFile."waybar/style.css".source = ../dot_config/waybar/style.css;
     xdg.configFile."qt5ct/qt5ct.conf".source = ../dot_config/qt5ct/qt5ct.conf;
     xdg.configFile."mpv".source = ../dot_config/mpv;
+    xdg.configFile."ghostwriter".source = ../dot_config/ghostwriter;
+    xdg.configFile."pcmanfm-qt".source = ../dot_config/pcmanfm-qt;
+    xdg.configFile."lximage-qt".source = ../dot_config/lximage-qt;
+    xdg.configFile."transmission/settings.json".source =
+../dot_config/transmission/settings.json;
+   xdg.configFile."QtProject.conf".source = ../dot_config/QtProject.conf;
     
     home.packages = [
       (pkgs.writeShellScriptBin "dmenu" ''
@@ -160,7 +166,7 @@
 
   networking.networkmanager = {
     enable = true;
-    wifi.backend = "iwd";
+#    wifi.backend = "iwd";
   };
   users.extraGroups.network-manager.members = [ "tyd2l" ];
   
