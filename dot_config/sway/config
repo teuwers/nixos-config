@@ -251,3 +251,4 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 exec mako
 exec kdeconnect-indicator
+exec transmission-qt

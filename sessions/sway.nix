@@ -13,19 +13,22 @@
   ### Apps
       kitty
       evince
-      gnome.nautilus
-      gnome.file-roller
       gnome.gedit
-      gnome.eog
-      gnome.zenity
-      gnome.simple-scan
-      gnome.gnome-disk-utility
-      gparted
-      transmission-gtk
-      apostrophe
+      libsForQt5.kate
+      libsForQt5.kdialog
+      transmission-qt
+      ghostwriter
       font-manager
+      skanlite
       gimp-with-plugins
       mpv
+      pcmanfm-qt
+      lxqt.lxqt-archiver
+      lxqt.lxqt-sudo
+      lxqt.qps
+      lxqt.lximage-qt
+      lxqt.pavucontrol-qt
+      qsudo
   ### Environment packages
       swaylock	
       swayidle
@@ -41,15 +44,13 @@
       brightnessctl
       gthumb
       imagemagick
-      pavucontrol
       glib
-      evolution-data-server
       networkmanager_dmenu
       bluez
       bluez-tools
       bluez-alsa
-      trash-cli
       nix-prefetch-git
+      libsecret
       libsForQt5.qt5.qtgraphicaleffects
   ### Interface
       gtk-engine-murrine
@@ -175,6 +176,7 @@
   environment.sessionVariables = 
   {
     QT_QPA_PLATFORMTHEME = "qt5ct";
+    SHELL = "{pkgs.fish}/bin/fish";
 #    XCURSOR_THEME = "capitaine-cursors-white";
   };
 #  environment.systemPackages = with pkgs; [ polkit_gnome ];
@@ -190,7 +192,7 @@
         destination = "/bin/startsway";
         executable = true;
         text = ''
-          #! ${pkgs.bash}/bin/bash
+          #! ${pkgs.bash}/bin/fish
 
           # first import environment variables from the login manager
           systemctl --user import-environment
@@ -219,7 +221,6 @@
     serviceConfig = {
       Type = "simple";
       ExecStart = ''
-        ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --debug
       '';
       Restart = "on-failure";
       RestartSec = 1;

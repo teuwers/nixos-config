@@ -119,6 +119,7 @@
     liberation_ttf
     line-awesome
     noto-fonts
+    noto-fonts-extra
     noto-fonts-cjk
     noto-fonts-emoji
   ];

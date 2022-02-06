@@ -85,7 +85,7 @@
         "portable": ""
       },
       "format-muted": "muted",
-      "on-click": "pavucontrol",
+      "on-click": "pavucontrol-qt",
       "scroll-step": 5
     },
     "sway/mode": {
