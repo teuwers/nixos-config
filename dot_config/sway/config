@@ -1,3 +1,6 @@
+# Wallpaper
+set $wall /etc/nixos/wallpapers/5.jpg
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 
@@ -8,7 +11,7 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-set $term kitty
+set $term foot
 
 # Networkmanager
 bindsym $mod+n exec networkmanager_dmenu
@@ -23,15 +26,15 @@ bindsym $mod+p exec rofi -show p -modi p:rofi-power-menu
 set $menu rofi -show drun
 
 # Wallpaper
-output * bg /etc/nixos/wallpapers/5.jpg fill
+output * bg $wall fill
 
 seat seat0 xcursor_theme capitaine-cursors-white 24
 
 exec swayidle -w \
-         timeout 120000 'swaylock -f -i /etc/nixos/wallpapers/5.jpg' \
+         timeout 120000 'swaylock --clock --indicator --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M" -i $wall' \
          timeout 110000 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -i /etc/nixos/wallpapers/5.jpg'
+         before-sleep 'swaylock --clock --indicator --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M" -i $wall'
 
 input type:touchpad {
        dwt enabled
@@ -218,8 +221,7 @@ bindsym $mod+f11 exec brightnessctl set 5%-
 bindsym $mod+f12 exec brightnessctl set +5%
 #bindsym $mod+m exec swaymsg "output * dpms off" 
 #bindsym $mod+n exec swaymsg "output * dpms on"
-bindsym $mod+f7 exec swaylock -f -i /etc/nixos/wallpapers/5.jpg
-
+bindsym $mod+f7 exec swaylock --clock --indicator --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M" -i $wall
 bindsym Print exec grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
 
 exec_always import-gsettings
@@ -228,7 +230,6 @@ exec_always import-gsettings
 #bindsym $mod+f9 exec swayshot region
 
 #exec swaylock -f -i /etc/nixos/wallpapers/2.png
-
 
 ############
 # gaps
@@ -251,4 +252,3 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 exec mako
 exec kdeconnect-indicator
-exec transmission-qt

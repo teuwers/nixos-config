@@ -8,11 +8,12 @@
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
   ### Apps
-      kitty
+      #kitty
+      foot
       libsForQt5.okular
       gnome.gedit
       libsForQt5.kdialog
-      transmission-qt
+      qbittorrent
       ghostwriter
       font-manager
       skanlite
@@ -25,7 +26,7 @@
       lxqt.lximage-qt
       lxqt.pavucontrol-qt
   ### Environment packages
-      swaylock	
+      swaylock-effects
       swayidle
       xwayland
       wl-clipboard
@@ -47,6 +48,8 @@
       nix-prefetch-git
       libsecret
       libsForQt5.qt5.qtgraphicaleffects
+      polkit
+      polkit_gnome
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -95,8 +98,7 @@
     xdg.configFile."ghostwriter".source = ../dot_config/ghostwriter;
     xdg.configFile."pcmanfm-qt".source = ../dot_config/pcmanfm-qt;
     xdg.configFile."lximage-qt".source = ../dot_config/lximage-qt;
-    xdg.configFile."transmission/settings.json".source =
-../dot_config/transmission/settings.json;
+#    xdg.configFile."transmission/settings.json".source = ../dot_config/transmission/settings.json;
    xdg.configFile."QtProject.conf".source = ../dot_config/QtProject.conf;
     
     home.packages = [
@@ -104,7 +106,7 @@
       exec ${pkgs.rofi}/bin/rofi -dmenu "$@"
       '')
       (pkgs.writeShellScriptBin "xterm" ''
-      exec ${pkgs.kitty}/bin/kitty "$@"
+      exec ${pkgs.foot}/bin/foot "$@"
       '')
     ];
     
@@ -202,7 +204,6 @@
         '';
       }
     )
-    polkit_gnome
   ];
 
   systemd.user.targets.sway-session = {
@@ -240,4 +241,6 @@
     rev = "1ddbc490a500bdd938a797e72a480f535191b45e";
     sha256 = "0b2ga0f4z61h7hfip2clfqdvr6friix1a8q6laiklfq7d4rm236l";
   })}";
+  
+  security.polkit.enable = true;
 } 

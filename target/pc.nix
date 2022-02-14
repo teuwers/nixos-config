@@ -12,6 +12,7 @@
     jmtpfs
     exfat
     exfatprogs
+    xboxdrv
  ## Network
     firefox-wayland
     thunderbird-wayland
@@ -76,8 +77,5 @@
   
 #  virtualisation.libvirtd.enable = true;
 #  users.extraGroups.libvirtd.members = [ "tyd2l" ];
-
-  programs.steam.enable = true;
-  hardware.steam-hardware.enable = true;
   
 }
