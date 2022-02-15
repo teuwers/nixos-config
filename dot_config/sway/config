@@ -1,6 +1,9 @@
 # Wallpaper
 set $wall /etc/nixos/wallpapers/5.jpg
 
+# Multilanguage binds support
+set $mlbind bindsym --to-code
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 
@@ -14,13 +17,13 @@ set $right l
 set $term foot
 
 # Networkmanager
-bindsym $mod+n exec networkmanager_dmenu
+$mlbind $mod+n exec networkmanager_dmenu
 
 # Bluetooth
-bindsym $mod+shift+n exec --no-startup-id /etc/nixos/sessions/sway/rofi-bluetooth/rofi-bluetooth
+$mlbind $mod+shift+n exec --no-startup-id /etc/nixos/sessions/sway/rofi-bluetooth/rofi-bluetooth
 
 # Power menu
-bindsym $mod+p exec rofi -show p -modi p:rofi-power-menu
+$mlbind $mod+p exec rofi -show p -modi p:rofi-power-menu
 
 # Your preferred application launcher
 set $menu rofi -show drun
@@ -51,13 +54,13 @@ input * xkb_numlock enable
 ### Key bindings
 
     # Start a terminal
-    bindsym $mod+Return exec $term 
+    $mlbind $mod+Return exec $term 
 
     # Kill focused window
-    bindsym $mod+q kill 
+    $mlbind $mod+q kill 
 
     # Start your launcher
-    bindsym $mod+d exec $menu 
+    $mlbind $mod+d exec $menu 
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -67,57 +70,57 @@ input * xkb_numlock enable
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    $mlbind $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    $mlbind $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
     # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
+    $mlbind $mod+$left focus left
+    $mlbind $mod+$down focus down
+    $mlbind $mod+$up focus up
+    $mlbind $mod+$right focus right
     # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+    $mlbind $mod+Left focus left
+    $mlbind $mod+Down focus down
+    $mlbind $mod+Up focus up
+    $mlbind $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    $mlbind $mod+Shift+$left move left
+    $mlbind $mod+Shift+$down move down
+    $mlbind $mod+Shift+$up move up
+    $mlbind $mod+Shift+$right move right
     # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+    $mlbind $mod+Shift+Left move left
+    $mlbind $mod+Shift+Down move down
+    $mlbind $mod+Shift+Up move up
+    $mlbind $mod+Shift+Right move right
 #
 # Workspaces:
 #
     # Switch to workspace
-    bindsym $mod+1 workspace 1
-    bindsym $mod+2 workspace 2
-    bindsym $mod+3 workspace 3
-    bindsym $mod+4 workspace 4
-    bindsym $mod+5 workspace 5
-    bindsym $mod+6 workspace 6
-    bindsym $mod+7 workspace 7
-    bindsym $mod+8 workspace 8
-    bindsym $mod+9 workspace 9
+    $mlbind $mod+1 workspace 1
+    $mlbind $mod+2 workspace 2
+    $mlbind $mod+3 workspace 3
+    $mlbind $mod+4 workspace 4
+    $mlbind $mod+5 workspace 5
+    $mlbind $mod+6 workspace 6
+    $mlbind $mod+7 workspace 7
+    $mlbind $mod+8 workspace 8
+    $mlbind $mod+9 workspace 9
     # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace 1
-    bindsym $mod+Shift+2 move container to workspace 2
-    bindsym $mod+Shift+3 move container to workspace 3
-    bindsym $mod+Shift+4 move container to workspace 4
-    bindsym $mod+Shift+5 move container to workspace 5
-    bindsym $mod+Shift+6 move container to workspace 6
-    bindsym $mod+Shift+7 move container to workspace 7
-    bindsym $mod+Shift+8 move container to workspace 8
-    bindsym $mod+Shift+9 move container to workspace 9
+    $mlbind $mod+Shift+1 move container to workspace 1
+    $mlbind $mod+Shift+2 move container to workspace 2
+    $mlbind $mod+Shift+3 move container to workspace 3
+    $mlbind $mod+Shift+4 move container to workspace 4
+    $mlbind $mod+Shift+5 move container to workspace 5
+    $mlbind $mod+Shift+6 move container to workspace 6
+    $mlbind $mod+Shift+7 move container to workspace 7
+    $mlbind $mod+Shift+8 move container to workspace 8
+    $mlbind $mod+Shift+9 move container to workspace 9
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -126,25 +129,25 @@ input * xkb_numlock enable
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith 
-    bindsym $mod+v splitv 
+    $mlbind $mod+b splith 
+    $mlbind $mod+v splitv 
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed 
-    bindsym $mod+e layout toggle split 
+    $mlbind $mod+s layout stacking
+    $mlbind $mod+w layout tabbed 
+    $mlbind $mod+e layout toggle split 
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen 
+    $mlbind $mod+f fullscreen 
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    $mlbind $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    $mlbind $mod+space focus mode_toggle
 
     # Move focus to the parent container
-    bindsym $mod+a focus parent 
+    $mlbind $mod+a focus parent 
 #
 # Scratchpad:
 #
@@ -152,11 +155,11 @@ input * xkb_numlock enable
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    $mlbind $mod+Shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    $mlbind $mod+minus scratchpad show
 #
 # Resizing containers:
 #
@@ -165,22 +168,22 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    $mlbind $left resize shrink width 10px
+    $mlbind $down resize grow height 10px
+    $mlbind $up resize shrink height 10px
+    $mlbind $right resize grow width 10px
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    $mlbind Left resize shrink width 10px
+    $mlbind Down resize grow height 10px
+    $mlbind Up resize shrink height 10px
+    $mlbind Right resize grow width 10px
 
     # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    $mlbind Return mode "default"
+    $mlbind Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+$mlbind $mod+r mode "resize"
 
 #
 # Status Bar:
@@ -213,21 +216,21 @@ default_border none
 #smart_gaps on
 #gaps inner 2
 
-bindsym $mod+f1 exec pactl set-sink-mute 0 toggle
-bindsym $mod+f2 exec pactl set-sink-volume @DEFAULT_SINK@ -1%
-bindsym $mod+f3 exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+$mlbind $mod+f1 exec pactl set-sink-mute 0 toggle
+$mlbind $mod+f2 exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+$mlbind $mod+f3 exec pactl set-sink-volume @DEFAULT_SINK@ +1%
 
-bindsym $mod+f11 exec brightnessctl set 5%-
-bindsym $mod+f12 exec brightnessctl set +5%
-#bindsym $mod+m exec swaymsg "output * dpms off" 
-#bindsym $mod+n exec swaymsg "output * dpms on"
-bindsym $mod+f7 exec swaylock --clock --indicator --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M" -i $wall
-bindsym Print exec grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
+$mlbind $mod+f11 exec brightnessctl set 5%-
+$mlbind $mod+f12 exec brightnessctl set +5%
+#$mlbind $mod+m exec swaymsg "output * dpms off" 
+#$mlbind $mod+n exec swaymsg "output * dpms on"
+$mlbind $mod+f7 exec swaylock --clock --indicator --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M" -i $wall
+$mlbind Print exec grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
 
 exec_always import-gsettings
 
-#bindsym $mod+f10 exec swayshot window
-#bindsym $mod+f9 exec swayshot region
+#$mlbind $mod+f10 exec swayshot window
+#$mlbind $mod+f9 exec swayshot region
 
 #exec swaylock -f -i /etc/nixos/wallpapers/2.png
 
