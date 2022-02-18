@@ -11,7 +11,6 @@
       #kitty
       foot
       libsForQt5.okular
-      gnome.gedit
       libsForQt5.kdialog
       qbittorrent
       ghostwriter
@@ -27,6 +26,8 @@
       lxqt.pavucontrol-qt
       gtypist
       klavaro
+      libsForQt5.kcalc
+      cudatext-gtk
   ### Environment packages
       swaylock-effects
       swayidle
@@ -34,7 +35,10 @@
       wl-clipboard
       mako
       waybar
-      rofi
+      rofi-wayland
+      rofi-power-menu
+      rofi-calc
+#      rofi-file-browser
       grim
       slurp
       wlogout
@@ -62,7 +66,6 @@
       adwaita-qt
       flat-remix-icon-theme
 #      capitaine-cursors
-      rofi-power-menu
     ];
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
@@ -90,21 +93,19 @@
       videos = "\$HOME/Videos";
     };
     
-    xdg.configFile."sway/config".source = ../dot_config/sway/config;
-    xdg.configFile."rofi/config.rasi".source = ../dot_config/rofi/config.rasi;
-    xdg.configFile."rofi/themes/oxide.rasi".source = ../dot_config/rofi/themes/oxide.rasi;
-#    xdg.configFile."kitty/kitty.conf".source = ../dot_config/kitty/kitty.conf;
+    xdg.configFile."sway".source = ../dot_config/sway;
+    xdg.configFile."rofi".source = ../dot_config/rofi;
+#    xdg.configFile."kitty.source = ../dot_config/kitty;
     xdg.configFile."foot".source = ../dot_config/foot;
-    xdg.configFile."mako/config".source = ../dot_config/mako/config;
-    xdg.configFile."waybar/config".source = ../dot_config/waybar/config;
-    xdg.configFile."waybar/style.css".source = ../dot_config/waybar/style.css;
-    xdg.configFile."qt5ct/qt5ct.conf".source = ../dot_config/qt5ct/qt5ct.conf;
+    xdg.configFile."mako".source = ../dot_config/mako;
+    xdg.configFile."waybar".source = ../dot_config/waybar;
+    xdg.configFile."qt5ct".source = ../dot_config/qt5ct;
     xdg.configFile."mpv".source = ../dot_config/mpv;
     xdg.configFile."ghostwriter".source = ../dot_config/ghostwriter;
     xdg.configFile."pcmanfm-qt".source = ../dot_config/pcmanfm-qt;
+    xdg.configFile."cudatext/settings/user.json".source = ../dot_config/cudatext/settings/user.json;
     xdg.configFile."lximage-qt".source = ../dot_config/lximage-qt;
-#    xdg.configFile."transmission/settings.json".source = ../dot_config/transmission/settings.json;
-   xdg.configFile."QtProject.conf".source = ../dot_config/QtProject.conf;
+    xdg.configFile."QtProject.conf".source = ../dot_config/QtProject.conf;
     
     home.packages = [
       (pkgs.writeShellScriptBin "dmenu" ''
@@ -186,6 +187,7 @@
     QT_QPA_PLATFORMTHEME = "qt5ct";
     SHELL = "{pkgs.fish}/bin/fish";
 #    XCURSOR_THEME = "capitaine-cursors-white";
+    TERM = "foot";
   };
 #  environment.systemPackages = with pkgs; [ polkit_gnome ];
   environment.pathsToLink = [ "/libexec" ];

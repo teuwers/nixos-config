@@ -45,26 +45,25 @@
     },
     "height": 30,
     "layer": "top",
-    "modules-center": [],
+    "modules-center": ["sway/window"],
     "modules-left": [
       "sway/workspaces",
-      "sway/mode",
-      "sway/window"
+      "sway/mode"
     ],
     "modules-right": [
+      "tray",
       "sway/language",
       "backlight",
       "battery",
       "network",
       "bluetooth",
       "pulseaudio",
-      "tray",
       "clock",
       "custom/shutdown"
     ],
     "network": {
-      "format-disconnected": "⚠ Disconnected",
-      "format-wifi": " {essid}",
+      "format-disconnected": "⚠Disconnected",
+      "format-wifi": "{essid}",
       "interface": "wlan0",
       "on-click": "networkmanager_dmenu"
     },
@@ -100,8 +99,8 @@
       "format": "{icon}"
     },
     "tray": {
-      "icon-size": 14,
-      "spacing": 5
+      "icon-size": 20,
+      "spacing": 10
     }
   }
 ]

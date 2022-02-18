@@ -14,6 +14,7 @@
     }
 
     window > box {
+#        background: #171717;
 		background: transparent;
         border-bottom: 3px transparent;
         color: white;
@@ -21,6 +22,7 @@
 
     tooltip {
         color: white;
+#        background-color: #171717;
         background-color: transparent;
         text-shadow: none;
     }
