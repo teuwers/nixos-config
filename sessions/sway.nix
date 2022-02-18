@@ -28,6 +28,7 @@
       klavaro
       libsForQt5.kcalc
       cudatext-gtk
+      celluloid
   ### Environment packages
       swaylock-effects
       swayidle
@@ -37,8 +38,6 @@
       waybar
       rofi-wayland
       rofi-power-menu
-      rofi-calc
-#      rofi-file-browser
       grim
       slurp
       wlogout
@@ -95,7 +94,6 @@
     
     xdg.configFile."sway".source = ../dot_config/sway;
     xdg.configFile."rofi".source = ../dot_config/rofi;
-#    xdg.configFile."kitty.source = ../dot_config/kitty;
     xdg.configFile."foot".source = ../dot_config/foot;
     xdg.configFile."mako".source = ../dot_config/mako;
     xdg.configFile."waybar".source = ../dot_config/waybar;

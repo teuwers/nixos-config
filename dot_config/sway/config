@@ -1,5 +1,5 @@
 # Wallpaper
-set $wall /etc/nixos/wallpapers/6.png
+set $wall /etc/nixos/wallpapers/4.png
 
 # Multilanguage binds support
 set $mlbind bindsym --to-code
@@ -26,10 +26,10 @@ $mlbind $mod+shift+n exec --no-startup-id /etc/nixos/sessions/sway/rofi-bluetoot
 $mlbind $mod+p exec rofi -show p -modi p:rofi-power-menu
 
 # Calc
-$mlbind $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
+$mlbind $mod+c exec kcalc
 
 # File Manager
-$mlbind $mod+f exec fd | rofi -show filebrowser
+$mlbind $mod+f exec rofi -show filebrowser
 
 # Your preferred application launcher
 set $menu rofi -show drun
@@ -238,12 +238,10 @@ exec_always import-gsettings
 #$mlbind $mod+f10 exec swayshot window
 #$mlbind $mod+f9 exec swayshot region
 
-#exec swaylock -f -i /etc/nixos/wallpapers/2.png
-
 ############
 # gaps
 default_border none
-#hide_edge_borders --i3 both
+hide_edge_borders --i3 both
 smart_borders off
 smart_gaps on
 gaps inner 4
