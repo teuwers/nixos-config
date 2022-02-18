@@ -102,9 +102,9 @@ input * xkb_numlock enable
 # Workspaces:
 #
     # Switch to workspace
-    $mlbind $mod+1 workspace 1
-    $mlbind $mod+2 workspace 2
-    $mlbind $mod+3 workspace 3
+    $mlbind $mod+1 workspace number 1
+    $mlbind $mod+2 workspace number 2
+    $mlbind $mod+3 workspace number 3
     $mlbind $mod+4 workspace 4
     $mlbind $mod+5 workspace 5
     $mlbind $mod+6 workspace 6
@@ -255,3 +255,4 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 exec mako
 exec kdeconnect-indicator
+exec_always --no-startup-id workstyle &> /tmp/workstyle.log

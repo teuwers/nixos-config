@@ -25,6 +25,8 @@
       lxqt.qps
       lxqt.lximage-qt
       lxqt.pavucontrol-qt
+      gtypist
+      klavaro
   ### Environment packages
       swaylock-effects
       swayidle
@@ -50,6 +52,8 @@
       libsForQt5.qt5.qtgraphicaleffects
       polkit
       polkit_gnome
+      workstyle
+      line-awesome
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -89,7 +93,8 @@
     xdg.configFile."sway/config".source = ../dot_config/sway/config;
     xdg.configFile."rofi/config.rasi".source = ../dot_config/rofi/config.rasi;
     xdg.configFile."rofi/themes/oxide.rasi".source = ../dot_config/rofi/themes/oxide.rasi;
-    xdg.configFile."kitty/kitty.conf".source = ../dot_config/kitty/kitty.conf;
+#    xdg.configFile."kitty/kitty.conf".source = ../dot_config/kitty/kitty.conf;
+    xdg.configFile."foot".source = ../dot_config/foot;
     xdg.configFile."mako/config".source = ../dot_config/mako/config;
     xdg.configFile."waybar/config".source = ../dot_config/waybar/config;
     xdg.configFile."waybar/style.css".source = ../dot_config/waybar/style.css;
@@ -241,6 +246,14 @@
     rev = "1ddbc490a500bdd938a797e72a480f535191b45e";
     sha256 = "0b2ga0f4z61h7hfip2clfqdvr6friix1a8q6laiklfq7d4rm236l";
   })}";
+
+#  services.greetd.enable = true;
+#  services.greetd.settings = 
+#  {
+#    default_session = {
+#      command = "${pkgs.greetd.greetd}/bin/agreety --cmd sway";
+#    };
+#  };  
   
   security.polkit.enable = true;
 } 
