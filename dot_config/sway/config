@@ -260,3 +260,4 @@ exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPL
 exec mako
 exec kdeconnect-indicator
 exec_always --no-startup-id workstyle &> /tmp/workstyle.log
+exec --no-startup-id dunst

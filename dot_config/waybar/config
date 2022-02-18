@@ -59,7 +59,8 @@
       "bluetooth",
       "pulseaudio",
       "clock",
-      "custom/shutdown"
+      "custom/shutdown",
+      "custom/notification"
     ],
     "network": {
       "format-disconnected": "⚠Disconnected",

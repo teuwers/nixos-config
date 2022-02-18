@@ -34,7 +34,6 @@
       swayidle
       xwayland
       wl-clipboard
-      mako
       waybar
       rofi-wayland
       rofi-power-menu
@@ -56,7 +55,8 @@
       polkit
       polkit_gnome
       workstyle
-      line-awesome
+      libappindicator
+      dunst
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -64,6 +64,7 @@
       gnome-themes-standard
       adwaita-qt
       flat-remix-icon-theme
+      line-awesome
 #      capitaine-cursors
     ];
     extraSessionCommands = ''
@@ -71,6 +72,7 @@
       export QT_QPA_PLATFORM=wayland
       export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
       export MOZ_ENABLE_WAYLAND=1
+      XDG_CURRENT_DESKTOP=Unity
 #      export _JAVA_AWT_WM_NONREPARENTING=1
     '';
   };
@@ -95,7 +97,7 @@
     xdg.configFile."sway".source = ../dot_config/sway;
     xdg.configFile."rofi".source = ../dot_config/rofi;
     xdg.configFile."foot".source = ../dot_config/foot;
-    xdg.configFile."mako".source = ../dot_config/mako;
+    xdg.configFile."dunst".source = ../dot_config/dunst;
     xdg.configFile."waybar".source = ../dot_config/waybar;
     xdg.configFile."qt5ct".source = ../dot_config/qt5ct;
     xdg.configFile."mpv".source = ../dot_config/mpv;
