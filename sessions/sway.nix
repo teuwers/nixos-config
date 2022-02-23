@@ -285,10 +285,10 @@
       '';
   };
 
-  #systemd.timers.grive_timer = {
-  #  wantedBy = [ "timers.target" ];
-  #  partOf = [ "grive_timer.service" ];
-  #  timerConfig.OnCalendar = [ "*:0/5" ];
-  #  };
+  systemd.timers.grive_timer = {
+    wantedBy = [ "timers.target" ];
+    partOf = [ "grive_timer.service" ];
+    timerConfig.OnCalendar = [ "*:0/5" ];
+  };
 
 } 
