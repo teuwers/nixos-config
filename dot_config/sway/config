@@ -194,7 +194,6 @@ $mlbind $mod+r mode "resize"
 #
 # Status Bar:
 #
-# Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
     swaybar_command waybar
@@ -206,7 +205,8 @@ bar {
     }
 }
 
-include @sysconfdir@/sway/config.d/*
+#include @sysconfdir@/barify/*
+include /etc/sway/config.d/*
 
 input * {
     xkb_layout "us,ru"
@@ -219,21 +219,22 @@ focus_follows_mouse no
 for_window [class="^.*"] border none
 default_border none
 
-#smart_gaps on
-#gaps inner 2
+# Fn keys
+# $mlbind XF86AudioMute exec pactl --no-startup-id  set-sink-mute 0 toggle
+# $mlbind XF86AudioLowerVolume exec pactl --no-startup-id  set-sink-volume @DEFAULT_SINK@ -1%
+# $mlbind XF86AudioRaiseVolume exec pactl --no-startup-id  set-sink-volume @DEFAULT_SINK@ +1%
+$mlbind XF86AudioRaiseVolume exec amixer sset Master 2%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
+$mlbind XF86AudioLowerVolume exec amixer sset Master 2%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
+$mlbind XF86AudioMute exec amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > $WOBSOCK
+$mlbind XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
+$mlbind XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $WOBSOCK
+$mlbind XF86AudioNext exec playerctl next
+$mlbind XF86AudioPause exec playerctl pause
+$mlbind XF86AudioPlay exec playerctl play
+$mlbind XF86AudioPrev exec playerctl previous
 
-$mlbind $mod+f1 exec pactl set-sink-mute 0 toggle
-$mlbind $mod+f2 exec pactl set-sink-volume @DEFAULT_SINK@ -1%
-$mlbind $mod+f3 exec pactl set-sink-volume @DEFAULT_SINK@ +1%
-
-$mlbind $mod+f11 exec brightnessctl set 5%-
-$mlbind $mod+f12 exec brightnessctl set +5%
-#$mlbind $mod+m exec swaymsg "output * dpms off" 
-#$mlbind $mod+n exec swaymsg "output * dpms on"
 $mlbind $mod+f7 exec swaylock --clock --indicator --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M" -i $wall
 $mlbind Print exec grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
-
-exec_always import-gsettings
 
 #$mlbind $mod+f10 exec swayshot window
 #$mlbind $mod+f9 exec swayshot region
@@ -247,7 +248,6 @@ smart_gaps on
 gaps inner 4
 gaps outer -4
 
-
 #colors
 # class                 border  backgr. text    indicator child_border
 client.focused          #222222 #5A5A5A #E1E1E1 #000000   #000000
@@ -256,8 +256,13 @@ client.unfocused        #222222 #323232 #888888 #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
+exec_always import-gsettings
 exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
-exec mako
-exec kdeconnect-indicator
-exec_always --no-startup-id workstyle &> /tmp/workstyle.log
+exec --no-startup-id kdeconnect-indicator
+exec_always swaywsr --config ~/.config/swaywsr/config.toml
+exec swaykbdd 
 exec --no-startup-id dunst
+
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+

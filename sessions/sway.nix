@@ -1,6 +1,11 @@
 { config, pkgs, stdenv, fetchFromGitHub, ... }:
 
 {
+  imports =
+    [ 
+      #sway/xcursor-theme.nix
+    ];
+
   users.extraGroups.sway.members = [ "tyd2l" ];
 
   programs.sway = {
@@ -8,7 +13,6 @@
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
   ### Apps
-      #kitty
       foot
       libsForQt5.okular
       libsForQt5.kdialog
@@ -18,9 +22,6 @@
       skanlite
       krita
       mpv
-      pcmanfm-qt
-      lxqt.lxqt-archiver
-      lxqt.lxqt-sudo
       lxqt.qps
       lxqt.lximage-qt
       lxqt.pavucontrol-qt
@@ -28,7 +29,6 @@
       klavaro
       libsForQt5.kcalc
       cudatext-gtk
-      celluloid
   ### Environment packages
       swaylock-effects
       swayidle
@@ -41,7 +41,6 @@
       slurp
       wlogout
       wl-clipboard
-      brightnessctl
       gthumb
       imagemagick
       glib
@@ -54,9 +53,17 @@
       libsForQt5.qt5.qtgraphicaleffects
       polkit
       polkit_gnome
-      workstyle
+      swaywsr
+      swaykbdd
       libappindicator
       dunst
+      wob
+      playerctl
+      xorg.xev
+      wev
+      grive2
+      gnome.nautilus
+      gnome.file-roller
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -72,8 +79,11 @@
       export QT_QPA_PLATFORM=wayland
       export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
       export MOZ_ENABLE_WAYLAND=1
-      XDG_CURRENT_DESKTOP=Unity
-#      export _JAVA_AWT_WM_NONREPARENTING=1
+      export XDG_CURRENT_DESKTOP=sway
+      export XDG_SESSION_TYPE=wayland
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export GDK_BACKEND=wayland
+      
     '';
   };
   
@@ -98,6 +108,7 @@
     xdg.configFile."rofi".source = ../dot_config/rofi;
     xdg.configFile."foot".source = ../dot_config/foot;
     xdg.configFile."dunst".source = ../dot_config/dunst;
+    xdg.configFile."swaywsr".source = ../dot_config/swaywsr;
     xdg.configFile."waybar".source = ../dot_config/waybar;
     xdg.configFile."qt5ct".source = ../dot_config/qt5ct;
     xdg.configFile."mpv".source = ../dot_config/mpv;
@@ -116,14 +127,14 @@
       '')
     ];
     
-    xsession = {
-      enable = true;
+ #   xsession = {
+ #     enable = true;
 #      pointerCursor = {
 #        size = 40;
 #        package = pkgs.capitaine-cursors;
 #        name = "capitaine-cursors-white";
 #      };
-    };
+ #0   };
     
     gtk = {
       enable = true;
@@ -172,10 +183,15 @@
     gtkUsePortal = true;
   };
 
+  networking.wireless.iwd.enable = true;
   networking.networkmanager = {
     enable = true;
-#    wifi.backend = "iwd";
-  };
+#    dns = "systemd-resolved";
+    wifi = {
+      backend = "iwd";
+#      powersave = true;
+    };
+  };  
   users.extraGroups.network-manager.members = [ "tyd2l" ];
   
   services.udisks2.enable = true;
@@ -189,10 +205,13 @@
 #    XCURSOR_THEME = "capitaine-cursors-white";
     TERM = "foot";
   };
-#  environment.systemPackages = with pkgs; [ polkit_gnome ];
+
   environment.pathsToLink = [ "/libexec" ];
   programs.dconf.enable = true;
   services.gvfs.enable = true;
+  services.upower.enable = true;
+  programs.light.enable = true;
+  hardware.acpilight.enable = true;
   
   # Here we but a shell script into path, which lets us start sway.service (after importing the environment of the login shell).
   environment.systemPackages = with pkgs; [
@@ -253,9 +272,23 @@
 #  services.greetd.settings = 
 #  {
 #    default_session = {
-#      command = "${pkgs.greetd.greetd}/bin/agreety --cmd sway";
+#      command = "${pkgs.greetd.wlgreet}/bin/wlgreet --cmd sway";
 #    };
 #  };  
   
   security.polkit.enable = true;
+  
+  systemd.services.grive_timer = {
+    serviceConfig.Type = "oneshot";
+    script = ''
+        grive -p /home/tyd2l/GDrive
+      '';
+  };
+
+  #systemd.timers.grive_timer = {
+  #  wantedBy = [ "timers.target" ];
+  #  partOf = [ "grive_timer.service" ];
+  #  timerConfig.OnCalendar = [ "*:0/5" ];
+  #  };
+
 } 

@@ -1,0 +1,24 @@
+[icons]
+# font awesome
+TelegramDesktop = ""
+Firefox = ""
+Alacritty = ""
+Termite = ""
+Thunderbird = ""
+Gpick = ""
+# smile emoji
+MyNiceProgram = "😛"
+
+[aliases]
+"telegramdesktop" = "Telegram"
+"firefox" = "Firefox"
+"org.kde.kcalc" = "KCalc"
+"org.kde.dolphin" = "Dolphin"
+"pcmanfm-qt" = "PCManFM"
+"lxqt.pcmanfm-qt" = "PCManFM"
+"foot" = "Foot"
+"org.qbittorrent.qBittorrent" = "QBittorrent"
+"org.gnome.Nautilus" = "Nautilus"
+
+[general]
+separator = " | "

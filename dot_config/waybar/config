@@ -5,9 +5,9 @@
       "format-icons": [
         ""
       ],
-      "on-click": "brightnessctl s 50%",
-      "on-scroll-down": "brightnessctl s 5%-",
-      "on-scroll-up": "brightnessctl s 5%+"
+      "on-click": "light -S 50",
+      "on-scroll-down": "light -U 5",
+      "on-scroll-up": "light -A 5"
     },
     "battery": {
       "format": "{icon} {capacity}%",

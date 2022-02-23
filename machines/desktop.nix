@@ -59,16 +59,12 @@
   networking = {
     hostName = "mike-desktop";
     interfaces.wlan0.useDHCP = true;
-#    wireless.iwd.enable = true;
     };
-  
-#  networking.networkmanager = {
-#    enable = true;
-#    dns = "systemd-resolved";
-#    wifi = {
-#      backend = "iwd";
-#      powersave = true;
-#    };
-#  };  
-# users.users.tyd2l.extraGroups = [ "networkmanager" ];
+
+  #nixpkgs.config.packageOverrides = pkgs: {
+  #  steam = pkgs.steam.override {
+  #    nativeOnly = true;
+  #  };
+  #};
+  programs.steam.enable = true;
 }
