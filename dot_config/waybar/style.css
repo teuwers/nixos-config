@@ -14,14 +14,14 @@
     }
 
     window > box {
-		background: transparent;
+        background: black;
         border-bottom: 3px transparent;
         color: white;
     }
 
     tooltip {
         color: white;
-        background-color: transparent;
+        background-color: black;
         text-shadow: none;
     }
 
@@ -44,6 +44,8 @@
         padding: 0 5px;
         border-bottom: 3px solid #ffffff;
         border-top: 2px solid #171717;
+        background-color: #ffffff;
+        color: black;
     }
 
     #mode {
@@ -94,4 +96,5 @@
         animation-iteration-count: infinite;
         animation-direction: alternate;
     }
+    
     

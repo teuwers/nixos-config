@@ -29,6 +29,8 @@
       klavaro
       libsForQt5.kcalc
       cudatext-gtk
+      pcmanfm
+      xarchiver
   ### Environment packages
       swaylock-effects
       swayidle
@@ -62,8 +64,6 @@
       xorg.xev
       wev
       grive2
-      gnome.nautilus
-      gnome.file-roller
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -71,7 +71,6 @@
       gnome-themes-standard
       adwaita-qt
       flat-remix-icon-theme
-      line-awesome
 #      capitaine-cursors
     ];
     extraSessionCommands = ''

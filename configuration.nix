@@ -11,7 +11,6 @@
 
   system.stateVersion = "21.11";
   services.fwupd.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
   nixpkgs.config.allowUnfree = true;
   
 #### Remove old generations
@@ -37,48 +36,11 @@
   
   services.ntp.enable = true;
   
-#### User account
-
-  users.users.tyd2l = {
-    isNormalUser = true;
-    extraGroups = [ 
-    "wheel" 
-    "sound" 
-    "video" 
-    "lp" 
-    "networkmanager"
-  ]; 
-    uid = 1000;
-  };
- 
-#### Bluetooth
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-
 #### SSH
   
   services.sshd.enable = true;
   programs.ssh.startAgent = true;
   
-#### Sound
-
-  sound.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-  };
- 
-#### Printing
-
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [ samsungUnifiedLinuxDriver hplip gutenprint canon-cups-ufr2 ];
-  };
-
 #### TRIM
 
   services.fstrim.enable = true;
@@ -132,18 +94,5 @@
     keyMap = "ru";
   };
 
-#### Shell
-
-  programs.zsh = {
-    enable = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-    ohMyZsh = {
-      enable = true;
-      theme = "af-magic";
-    };
-  };
-  
-  users.extraUsers.tyd2l.shell = pkgs.fish;
   users.extraUsers.root.shell = pkgs.fish;
 }

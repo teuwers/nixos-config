@@ -6,15 +6,16 @@
       <home-manager/nixos>
     ];
 
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
   environment.systemPackages = with pkgs; [
-    libnotify
     mtpfs
     jmtpfs
     exfat
     exfatprogs
     xboxdrv
  ## Network
-    firefox-wayland
+    brave
     thunderbird-wayland
     tdesktop
     spotify
@@ -23,7 +24,7 @@
  ## Vulkan support
     vulkan-headers
     vulkan-loader
-   # vulkan-extension-layer
+    vulkan-extension-layer
  ## Text
     libreoffice-fresh
     simplenote
@@ -32,6 +33,44 @@
     clang
     pkgs.gitAndTools.gitFull
   ];
+  
+#### User account
+
+  users.users.tyd2l = {
+    isNormalUser = true;
+    extraGroups = [ 
+    "wheel" 
+    "sound" 
+    "video" 
+    "lp" 
+  ]; 
+    uid = 1000;
+  };
+  
+  users.extraUsers.tyd2l.shell = pkgs.fish;
+ 
+#### Bluetooth
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  
+#### Sound
+
+  sound.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
+ 
+#### Printing
+
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [ samsungUnifiedLinuxDriver hplip gutenprint canon-cups-ufr2 ];
+  };
   
 #### Progs configs
 
