@@ -43,6 +43,7 @@
     "sound" 
     "video" 
     "lp" 
+    "pipiwire"
   ]; 
     uid = 1000;
   };
@@ -58,18 +59,22 @@
   
 #### Sound
 
-  sound.enable = true;
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = false;
+    systemWide = true;
+    media-session.enable = true;
   };
  
 #### Printing
 
   services.printing = {
     enable = true;
-    drivers = with pkgs; [ samsungUnifiedLinuxDriver hplip gutenprint canon-cups-ufr2 ];
+    drivers = with pkgs; [ samsung-unified-linux-driver hplip gutenprint canon-cups-ufr2 ];
   };
   
 #### Progs configs

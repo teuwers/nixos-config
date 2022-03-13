@@ -31,6 +31,7 @@
       cudatext-gtk
       pcmanfm
       xarchiver
+      celluloid
   ### Environment packages
       swaylock-effects
       swayidle
@@ -68,7 +69,7 @@
       gtk-engine-murrine
       gtk_engines
       gsettings-desktop-schemas
-      gnome-themes-standard
+      gnome-themes-extra
       adwaita-qt
       flat-remix-icon-theme
 #      capitaine-cursors
