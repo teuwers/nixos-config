@@ -6,7 +6,7 @@
       #sway/xcursor-theme.nix
     ];
 
-  users.extraGroups.sway.members = [ "tyd2l" ];
+  users.extraGroups.sway.members = [ "teuwers" ];
 
   programs.sway = {
     enable = true;
@@ -89,7 +89,7 @@
   
 #### Apps config
 
-  home-manager.users.tyd2l = { pkgs, ... }: {
+  home-manager.users.teuwers = { pkgs, ... }: {
   
     xdg.userDirs = {
       enable = true;
@@ -134,7 +134,7 @@
 #        package = pkgs.capitaine-cursors;
 #        name = "capitaine-cursors-white";
 #      };
- #0   };
+ #   };
     
     gtk = {
       enable = true;
@@ -143,11 +143,11 @@
       theme.name = "Adwaita-dark";
       gtk3.bookmarks = 
         [ 
-          "file:///home/tyd2l/Audios"
-          "file:///home/tyd2l/Docs"
-          "file:///home/tyd2l/Downloads"
-          "file:///home/tyd2l/Images"
-          "file:///home/tyd2l/Videos"
+          "file:///home/teuwers/Audios"
+          "file:///home/teuwers/Docs"
+          "file:///home/teuwers/Downloads"
+          "file:///home/teuwers/Images"
+          "file:///home/teuwers/Videos"
           "file:///etc/nixos"
         ];  
       gtk3.extraConfig = 
@@ -192,7 +192,7 @@
 #      powersave = true;
     };
   };  
-  users.extraGroups.network-manager.members = [ "tyd2l" ];
+  users.extraGroups.network-manager.members = [ "teuwers" ];
   
   services.udisks2.enable = true;
   
