@@ -36,7 +36,7 @@
   
 #### User account
 
-  users.users.tyd2l = {
+  users.users.teuwers = {
     isNormalUser = true;
     extraGroups = [ 
     "wheel" 
@@ -48,7 +48,7 @@
     uid = 1000;
   };
   
-  users.extraUsers.tyd2l.shell = pkgs.fish;
+  users.extraUsers.teuwers.shell = pkgs.fish;
  
 #### Bluetooth
 
@@ -85,7 +85,7 @@
   
     programs.git = {
       enable = true;
-      userName  = "tyd2l";
+      userName  = "teuwers";
       userEmail = "tyd2l@posteo.net";
       extraConfig = {
         credential.helper = "cache --timeout=36000";
@@ -117,9 +117,9 @@
 #    enable = true;
 #    enableExtensionPack = true;
 #  };
-#  users.extraGroups.vboxusers.members = [ "tyd2l" ];
+#  users.extraGroups.vboxusers.members = [ "teuwers" ];
   
 #  virtualisation.libvirtd.enable = true;
-#  users.extraGroups.libvirtd.members = [ "tyd2l" ];
+#  users.extraGroups.libvirtd.members = [ "teuwers" ];
 
 }
