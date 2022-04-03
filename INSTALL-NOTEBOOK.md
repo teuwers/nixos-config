@@ -10,18 +10,18 @@ dd if=/dev/urandom of=./keyfile-swap.bin bs=1024 count=4
 ### Setup LUKS and add the keys
 
 ```sh
-cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 256 -h sha512 /dev/nvme0n1p3
+cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 256 -h sha512 /dev/sda3
 
-cryptsetup luksAddKey /dev/nvme0n1p3 keyfile-root.bin
-cryptsetup luksOpen /dev/nvme0n1p3 crypted-nixos -d keyfile-root.bin
+cryptsetup luksAddKey /dev/sda3 keyfile-root.bin
+cryptsetup luksOpen /dev/sda3 crypted-nixos -d keyfile-root.bin
 
-cryptsetup luksFormat -c aes-xts-plain64 -s 256 -h sha512 /dev/nvme0n1p2 -d keyfile-swap.bin
-cryptsetup luksOpen /dev/nvme0n1p2 crypted-swap -d keyfile-swap.bin
+cryptsetup luksFormat -c aes-xts-plain64 -s 256 -h sha512 /dev/sda2 -d keyfile-swap.bin
+cryptsetup luksOpen /dev/sda2 crypted-swap -d keyfile-swap.bin
 ```
 
 ### Format the partitions and mount
 ```sh
-mkfs.fat -F 32 /dev/nvme0n1p1
+mkfs.fat -F 32 /dev/sda1
 mkfs.ext4 -L root /dev/mapper/crypted-nixos
 mkswap -L swap /dev/mapper/crypted-swap
 ```
@@ -49,12 +49,12 @@ Sync the following with `/etc/nixos/hardware-configuration.nix`
 ```nix
   boot.initrd = {
     luks.devices."crypted-nixos" = {
-      device = "/dev/disk/by-uuid/..."; # UUID for /dev/nvme01np3 
+      device = "/dev/disk/by-uuid/..."; # UUID for /dev/sda3 
       keyFile = "/keyfile-root.bin";
       allowDiscards = true;
     };
     luks.devices."crypted-swap" = {
-      device = "/dev/disk/by-uuid/..."; # UUID for /dev/nvme01np2 
+      device = "/dev/disk/by-uuid/..."; # UUID for /dev/sda2 
       keyFile = "/keyfile-swap.bin";
       allowDiscards = true;
     };
@@ -91,15 +91,5 @@ nixos-install
 ```
 ### If bugs with installation, do this
 ```sh
-mkdir -p /mnt/mnt/etc
-cp -r /mnt/etc/secrets /mnt/mnt/etc/
-nixos-enter
-ls -al /etc
-```
-Delete all broken symlinks, then
-```sh
-nix-channel --add https://nixos.org/channels/nixos-unstable nixos
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-nixos-install --root /
+mkdir -p /mnt/mnt && mount --blind /mnt /mnt/mnt
 ```
