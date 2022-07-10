@@ -8,6 +8,7 @@
       ../sessions/sway.nix
       ../sessions/sway-notebook.nix
       #../sessions/gnome.nix
+      #../sessions/plasma.nix
     ];
 
   hardware.cpu.intel.updateMicrocode = true;
@@ -28,7 +29,7 @@
       version = 2;
       efiSupport = true;
       enableCryptodisk = true;
-      useOSProber = false;
+      useOSProber = true;
     };
   };
 

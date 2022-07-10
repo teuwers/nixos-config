@@ -64,7 +64,6 @@
       playerctl
       xorg.xev
       wev
-      grive2
   ### Interface
       gtk-engine-murrine
       gtk_engines
@@ -90,20 +89,6 @@
 #### Apps config
 
   home-manager.users.teuwers = { pkgs, ... }: {
-  
-    xdg.userDirs = {
-      enable = true;
-      createDirectories = true;
-      desktop = "\$HOME/Desktop";
-      documents = "\$HOME/Docs";
-      download = "\$HOME/Downloads";
-      music = "\$HOME/Audios";
-      pictures = "\$HOME/Images";
-      publicShare = "\$HOME/Public";
-      templates = "\$HOME/Templates";
-      videos = "\$HOME/Videos";
-    };
-    
     xdg.configFile."sway".source = ../dot_config/sway;
     xdg.configFile."rofi".source = ../dot_config/rofi;
     xdg.configFile."foot".source = ../dot_config/foot;
@@ -182,17 +167,6 @@
       xdg-desktop-portal-gtk ]; 
     gtkUsePortal = true;
   };
-
-  networking.wireless.iwd.enable = true;
-  networking.networkmanager = {
-    enable = true;
-#    dns = "systemd-resolved";
-    wifi = {
-      backend = "iwd";
-#      powersave = true;
-    };
-  };  
-  users.extraGroups.network-manager.members = [ "teuwers" ];
   
   services.udisks2.enable = true;
   
@@ -257,7 +231,6 @@
   };
   
   services.xserver.enable = true;
-  services.xserver.libinput.enable = true;
   services.xserver.displayManager.defaultSession = "sway";
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.displayManager.sddm.enableHidpi = true;
@@ -276,19 +249,5 @@
 #    };
 #  };  
   
-  security.polkit.enable = true;
-  
-  systemd.services.grive_timer = {
-    serviceConfig.Type = "oneshot";
-    script = ''
-        grive -p /home/tyd2l/GDrive
-      '';
-  };
-
-  systemd.timers.grive_timer = {
-    wantedBy = [ "timers.target" ];
-    partOf = [ "grive_timer.service" ];
-    timerConfig.OnCalendar = [ "*:0/5" ];
-  };
 
 } 

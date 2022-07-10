@@ -6,7 +6,9 @@
       <home-manager/nixos>
     ];
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  services.xserver.libinput.enable = true;
+  security.polkit.enable = true;
 
   environment.systemPackages = with pkgs; [
     mtpfs
@@ -59,15 +61,14 @@
   
 #### Sound
 
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    wireplumber.enable = false;
-    systemWide = true;
-    media-session.enable = true;
   };
  
 #### Printing
@@ -80,21 +81,32 @@
 #### Progs configs
 
   home-manager.useGlobalPkgs = true;
-
-  home-manager.users.tyd2l = { pkgs, ... }: {
-  
+  home-manager.users.teuwers = { pkgs, ... }: {
+    home.stateVersion = "22.05";
     programs.git = {
       enable = true;
       userName  = "teuwers";
-      userEmail = "tyd2l@posteo.net";
+      userEmail = "lrd2wers@yandex.ru";
       extraConfig = {
         credential.helper = "cache --timeout=36000";
       };
     };
+    xdg.userDirs = {
+      enable = true;
+      createDirectories = true;
+      desktop = "\$HOME/Desktop";
+      documents = "\$HOME/Docs";
+      download = "\$HOME/Downloads";
+      music = "\$HOME/Audios";
+      pictures = "\$HOME/Images";
+      publicShare = "\$HOME/Public";
+      templates = "\$HOME/Templates";
+      videos = "\$HOME/Videos";
+    };
   };
  
   programs.adb.enable = true;
-  users.extraGroups.adbusers.members = [ "tyd2l" ];
+  users.extraGroups.adbusers.members = [ "teuwers" ];
   
 #### GUI
   
@@ -110,6 +122,18 @@
   };
   
   programs.xwayland.enable = true;
+
+#### Network
+
+  networking.wireless.iwd.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi = {
+      backend = "iwd";
+      powersave = true;
+    };
+  };
+  users.extraGroups.network-manager.members = [ "teuwers" ];
   
 #### Virtualisation
   
