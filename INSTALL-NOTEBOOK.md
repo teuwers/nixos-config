@@ -29,7 +29,7 @@ mkswap -L swap /dev/mapper/crypted-swap
 ```sh
 mount /dev/mapper/crypted-nixos /mnt
 mkdir -p /mnt/boot/efi
-mount /dev/nvme0n1p1 /mnt/boot/efi
+mount /dev/sda1 /mnt/boot/efi
 swapon /dev/mapper/crypted-swap
 ```
 
