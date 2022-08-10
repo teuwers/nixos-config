@@ -91,5 +91,7 @@ nixos-install
 ```
 ### If bugs with installation, do this
 ```sh
-mkdir -p /mnt/mnt && mount --blind /mnt /mnt/mnt
+nixos-install
+sudo nixos-enter
+nixos-install -root /
 ```
