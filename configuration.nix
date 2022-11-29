@@ -62,13 +62,9 @@
     htop
     killall
     powerline
-    zsh-completions
-    pulseaudioFull
-    bluezFull
     p7zip
     handlr
     qrcp
-    linuxPackages_zen.virtualbox
     mime-types
     shared-mime-info
     unrar

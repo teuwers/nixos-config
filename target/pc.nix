@@ -18,6 +18,8 @@
     jmtpfs
     exfatprogs
     ventoy-bin-full
+    pulseaudioFull
+    bluezFull
  ## Network
     firefox-bin
     thunderbird-wayland
@@ -107,6 +109,10 @@
       publicShare = "\$HOME/.Public";
       templates = "\$HOME/.Templates";
       videos = "\$HOME/Videos";
+#      extraConfig = 
+#        {
+#           XDG_MISC_DIR = "${config.home.homeDirectory}/Misc";
+#        };
     };
   };
  
@@ -147,6 +153,7 @@
 #    enableExtensionPack = true;
 #  };
 #  users.extraGroups.vboxusers.members = [ "teuwers" ];
+#  environment.systemPackages = with pkgs; [ linuxPackages_zen.virtualbox ];
   
 #  virtualisation.libvirtd.enable = true;
 #  users.extraGroups.libvirtd.members = [ "teuwers" ];
