@@ -6,21 +6,25 @@
       <home-manager/nixos>
     ];
 
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+  services.xserver.enable = true;
   services.xserver.libinput.enable = true;
   security.polkit.enable = true;
 
   environment.systemPackages = with pkgs; [
+    nix-prefetch-git
+    gtypist
     mtpfs
     jmtpfs
-    exfat
     exfatprogs
-    xboxdrv
+    ventoy-bin-full
  ## Network
-    brave
+    firefox-bin
     thunderbird-wayland
     tdesktop
-    spotify
+    yandex-disk
+    qbittorrent
+    protonvpn-gui
  ## Security
     bitwarden
  ## Vulkan support
@@ -36,6 +40,8 @@
     pkgs.gitAndTools.gitFull
   ];
   
+  services.syncthing.enable = true;
+  
 #### User account
 
   users.users.teuwers = {
@@ -45,7 +51,7 @@
     "sound" 
     "video" 
     "lp" 
-    "pipiwire"
+    "pipewire"
   ]; 
     uid = 1000;
   };
@@ -61,8 +67,7 @@
   
 #### Sound
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  sound.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -94,13 +99,13 @@
     xdg.userDirs = {
       enable = true;
       createDirectories = true;
-      desktop = "\$HOME/Desktop";
+      desktop = "\$HOME/.Desktop";
       documents = "\$HOME/Docs";
       download = "\$HOME/Downloads";
       music = "\$HOME/Audios";
       pictures = "\$HOME/Images";
-      publicShare = "\$HOME/Public";
-      templates = "\$HOME/Templates";
+      publicShare = "\$HOME/.Public";
+      templates = "\$HOME/.Templates";
       videos = "\$HOME/Videos";
     };
   };

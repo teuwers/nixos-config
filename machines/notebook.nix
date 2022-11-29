@@ -5,9 +5,9 @@
     [ 
       ../target/pc.nix
 	# Choose WM/DE
-      ../sessions/sway.nix
-      ../sessions/sway-notebook.nix
-      #../sessions/gnome.nix
+      #../sessions/sway.nix
+      #../sessions/sway-notebook.nix
+      ../sessions/gnome.nix
       #../sessions/plasma.nix
     ];
 
@@ -39,7 +39,6 @@
     hostName = "mike-notebook";
     interfaces.enp1s0.useDHCP = true;
     interfaces.wlan0.useDHCP = true;
-    wireless.iwd.enable = true;
     };
 
 #### OpenGL drivers

@@ -51,11 +51,8 @@
       bluez
       bluez-tools
       bluez-alsa
-      nix-prefetch-git
       libsecret
       libsForQt5.qt5.qtgraphicaleffects
-      polkit
-      polkit_gnome
       swaywsr
       swaykbdd
       libappindicator
@@ -74,16 +71,18 @@
 #      capitaine-cursors
     ];
     extraSessionCommands = ''
-      export SDL_VIDEODRIVER=wayland
-      export QT_QPA_PLATFORM=wayland
       export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      export MOZ_ENABLE_WAYLAND=1
       export XDG_CURRENT_DESKTOP=sway
       export XDG_SESSION_TYPE=wayland
       export _JAVA_AWT_WM_NONREPARENTING=1
-      export GDK_BACKEND=wayland
-      
     '';
+  };
+  
+  environment.variables = {
+    SDL_VIDEODRIVER = "wayland";
+    QT_QPA_PLATFORM = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+    GDK_BACKEND = "wayland";
   };
   
 #### Apps config
@@ -160,13 +159,7 @@
   
 #### Environment config
 
-  xdg.portal = {
-    extraPortals = with pkgs; 
-    [ xdg-desktop-portal 
-      xdg-desktop-portal-wlr 
-      xdg-desktop-portal-gtk ]; 
-    gtkUsePortal = true;
-  };
+  xdg.portal.wlr.enable = true;
   
   services.udisks2.enable = true;
   

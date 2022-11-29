@@ -4,17 +4,34 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
   services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.enable = true;
   
-  hardware.pulseaudio.enable = false;
+  environment.variables = {
+    SDL_VIDEODRIVER = "wayland";
+    QT_QPA_PLATFORM = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+    GDK_BACKEND = "wayland";
+  };
   
-  networking.networkmanager.wifi.backend = "iwd";
+  qt5.platformTheme = "gnome";
   
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
   environment.systemPackages = with pkgs; [
+   #GNOME stuff
+    qgnomeplatform
     gnome.gnome-tweaks
     gnome.gnome-shell-extensions
-    gnomeExtensions.tilingnome
-    gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.night-theme-switcher
+    gnomeExtensions.alphabetical-app-grid
+    gnomeExtensions.appindicator
+    gnomeExtensions.espresso
+    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.gsconnect
+    gnomeExtensions.syncthing-indicator
+    
+    blackbox-terminal
   ];
 
 } 
