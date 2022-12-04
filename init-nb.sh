@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-sudo su
 dd if=/dev/urandom of=./keyfile-root.bin bs=1024 count=4
 dd if=/dev/urandom of=./keyfile-swap.bin bs=1024 count=4
 
 # Partitioning
 parted /dev/sda mklabel gpt
-parted /dev/sda mkpart "EFI system partition" fat32 1M 500M
+parted /dev/sda mkpart fat32 1M 500M
 parted /dev/sda set 1 esp on
 
 parted /dev/sda mkpart primary 500M 20.5G
