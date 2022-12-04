@@ -9,7 +9,7 @@
 
 #### System
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "22.11";
   services.fwupd.enable = true;
   nixpkgs.config.allowUnfree = true;
   

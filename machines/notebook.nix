@@ -14,6 +14,7 @@
   hardware.cpu.intel.updateMicrocode = true;
   services.xserver.videoDrivers = [ "modesetting" ];
   services.xserver.useGlamor = true;
+  powerManagement.enable = true;
   
 #### Bootloader
 
@@ -30,8 +31,11 @@
       efiSupport = true;
       enableCryptodisk = true;
       useOSProber = true;
+#      trustedBoot.enable = true;
+      trustedBoot.systemHasTPM = "YES_TPM_is_activated";
     };
   };
+  time.hardwareClockInLocalTime = true;
 
 #### Network
 
@@ -50,5 +54,13 @@
     libvdpau-va-gl
   ];
   
-  powerManagement.enable = true;
+#### MPV config
+  
+  home-manager.users.teuwers = { pkgs, ... }: {
+    home.packages = [
+      (pkgs.writeShellScriptBin "mpv" ''
+      exec ${pkgs.mpv}/bin/mpv --profile=M60 "$@"
+      '')
+    ];
+  };
 }

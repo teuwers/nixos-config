@@ -95,7 +95,6 @@
     xdg.configFile."swaywsr".source = ../dot_config/swaywsr;
     xdg.configFile."waybar".source = ../dot_config/waybar;
     xdg.configFile."qt5ct".source = ../dot_config/qt5ct;
-    xdg.configFile."mpv".source = ../dot_config/mpv;
     xdg.configFile."ghostwriter".source = ../dot_config/ghostwriter;
     xdg.configFile."pcmanfm-qt".source = ../dot_config/pcmanfm-qt;
     xdg.configFile."cudatext/settings/user.json".source = ../dot_config/cudatext/settings/user.json;

@@ -89,7 +89,7 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.users.teuwers = { pkgs, ... }: {
-    home.stateVersion = "22.05";
+    home.stateVersion = "22.11";
     programs.git = {
       enable = true;
       userName  = "teuwers";
@@ -114,6 +114,7 @@
 #           XDG_MISC_DIR = "${config.home.homeDirectory}/Misc";
 #        };
     };
+    xdg.configFile."mpv".source = ../dot_config/mpv;
   };
  
   programs.adb.enable = true;
