@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-sudo su
 dd if=/dev/urandom of=./keyfile-root.bin bs=1024 count=4
 dd if=/dev/urandom of=./keyfile-swap.bin bs=1024 count=4
 
 # Partitioning
 parted /dev/sda mklabel gpt
-parted /dev/sda mkpart "EFI system partition" fat32 1M 500M
+parted /dev/sda mkpart fat32 1M 500M
 parted /dev/sda set 1 esp on
 
 parted /dev/sda mkpart primary 500M 20.5G
@@ -37,28 +36,26 @@ mv /mnt/etc/nixos/hardware-configuration.nix ~/
 rm -r /mnt/etc/nixos
 git clone --recurse-submodules https://github.com/teuwers/nixos-config.git /mnt/etc/nixos
 mv ~/hardware-configuration.nix /mnt/etc/nixos/
-echo 
-"{ config, pkgs, ... }:
+echo '{ config, pkgs, ... }:
 
 {
   imports =
     [ 
 	 ./notebook.nix
     ];
-}" >> /mnt/etc/nixos/machines/current.nix
+}' >> /mnt/etc/nixos/machines/current.nix
 
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 
-echo "Now edit hardware-configuration.nix with this
-  boot.initrd = {
-    luks.devices."crypted-nixos" = {
-      device = "/dev/disk/by-uuid/..."; # UUID for /dev/sda3 
+SDA2_UUID=$(blkid -s UUID -o value /dev/sda2)
+echo 'boot.initrd = {
+    luks.devices."crypted-nixos" = { 
       keyFile = "/keyfile-root.bin";
       allowDiscards = true;
     };
     luks.devices."crypted-swap" = {
-      device = "/dev/disk/by-uuid/..."; # UUID for /dev/sda2 
+      device = "/dev/disk/by-uuid/'$SDA2_UUID'";
       keyFile = "/keyfile-swap.bin";
       allowDiscards = true;
     };
@@ -66,14 +63,23 @@ echo "Now edit hardware-configuration.nix with this
       "keyfile-root.bin" = "/etc/secrets/initrd/keyfile-root.bin";
       "keyfile-swap.bin" = "/etc/secrets/initrd/keyfile-swap.bin";
     };
-};"
-echo "UUID for /dev/sda3: "
-blkid -s UUID -o value /dev/sda3
-echo "UUID for /dev/sda2: "
-blkid -s UUID -o value /dev/sda2
+};' >> /mnt/etc/nixos/hardware-configuration.nix
 
-echo "and do nixos-install.
-Workaround for /etc bug:
+nixos-install
+
+nixos-enter
+sudo chown -R teuwers /etc/nixos
+
+mkdir -p ~/.repos
+ln -s /etc/nixos ~/.repos/nixos-config
+mkdir ~./config/gtk-3.0
+echo "file:///home/teuwers/.repos Repos" >> ~/.config/gtk-3.0/bookmarks
+
+mkdir -p ~/.yandex-disk
+echo "file:///home/teuwers/.yandex-disk Yandex.Disk" >> ~/.config/gtk-3.0/bookmarks
+echo "Name Yandex.Disk folder .yandex-disk"
+
+echo "Workaround for /etc bug:
 sudo nixos-enter
-nixos-install -root /"
+nixos-install --root /"
 

@@ -13,7 +13,6 @@
 
   hardware.cpu.intel.updateMicrocode = true;
   services.xserver.videoDrivers = [ "modesetting" ];
-  services.xserver.useGlamor = true;
   powerManagement.enable = true;
   
 #### Bootloader

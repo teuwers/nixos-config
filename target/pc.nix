@@ -7,7 +7,6 @@
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  services.xserver.enable = true;
   services.xserver.libinput.enable = true;
   security.polkit.enable = true;
 
@@ -23,9 +22,9 @@
  ## Network
     firefox-bin
     thunderbird-wayland
-    tdesktop
+    kotatogram-desktop
     yandex-disk
-    qbittorrent
+    transmission-gtk
     protonvpn-gui
  ## Security
     bitwarden
@@ -69,7 +68,7 @@
   
 #### Sound
 
-  sound.enable = false;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -121,19 +120,16 @@
   users.extraGroups.adbusers.members = [ "teuwers" ];
   
 #### GUI
-  
-  xdg.portal = {
-    enable = true;
-    gtkUsePortal = true;
-  };
+
+  services.xserver.enable = true;
+  programs.xwayland.enable = true;
+  xdg.portal.enable = true;
   
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
   };
-  
-  programs.xwayland.enable = true;
 
 #### Network
 

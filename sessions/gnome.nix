@@ -15,7 +15,7 @@
   qt5.platformTheme = "gnome";
   
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-
+  
   environment.systemPackages = with pkgs; [
    #GNOME stuff
     qgnomeplatform
@@ -31,7 +31,13 @@
     gnomeExtensions.gsconnect
     gnomeExtensions.syncthing-indicator
     
-    blackbox-terminal
+    celluloid
   ];
+  
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-tour
+    epiphany
+    xterm
+  ]);
 
 } 
