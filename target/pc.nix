@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
-
 {
   imports =
     [ 
       <home-manager/nixos>
+      ./wine-ge.nix
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -19,6 +19,7 @@
     ventoy-bin-full
     pulseaudioFull
     bluezFull
+    qrcp
  ## Network
     firefox-bin
     thunderbird-wayland
@@ -35,29 +36,51 @@
  ## Text
     libreoffice-fresh
     simplenote
+    obsidian
  ## Coding
     gcc
     clang
     pkgs.gitAndTools.gitFull
+    winetricks
   ];
   
-  services.syncthing.enable = true;
+  services.syncthing = {
+    enable = true;
+    openDefaultPorts = true;
+    systemService = true;
+    user = "teuwers";
+    configDir = "/home/teuwers/.config/syncthing";
+  };
   
 #### User account
 
   users.users.teuwers = {
     isNormalUser = true;
     extraGroups = [ 
-    "wheel" 
+    "wheel"
     "sound" 
     "video" 
     "lp" 
     "pipewire"
+    "syncthing"
   ]; 
     uid = 1000;
   };
   
-  users.extraUsers.teuwers.shell = pkgs.fish;
+  users.extraUsers.teuwers.shell = pkgs.zsh;
+  
+#### Network
+
+#  networking.wireless.iwd.enable = true;
+#  networking.wireless.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi = {
+#      backend = "iwd";
+      powersave = true;
+    };
+  };
+  users.extraGroups.network-manager.members = [ "teuwers" ];
  
 #### Bluetooth
 
@@ -115,6 +138,8 @@
     };
     xdg.configFile."mpv".source = ../dot_config/mpv;
   };
+  
+#### ADB
  
   programs.adb.enable = true;
   users.extraGroups.adbusers.members = [ "teuwers" ];
@@ -131,18 +156,6 @@
     driSupport32Bit = true;
   };
 
-#### Network
-
-  networking.wireless.iwd.enable = true;
-  networking.networkmanager = {
-    enable = true;
-    wifi = {
-      backend = "iwd";
-      powersave = true;
-    };
-  };
-  users.extraGroups.network-manager.members = [ "teuwers" ];
-  
 #### Virtualisation
   
 #  virtualisation.virtualbox.host = {
@@ -154,5 +167,4 @@
   
 #  virtualisation.libvirtd.enable = true;
 #  users.extraGroups.libvirtd.members = [ "teuwers" ];
-
 }

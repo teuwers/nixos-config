@@ -26,11 +26,8 @@
     gnomeExtensions.appindicator
     gnomeExtensions.espresso
     gnomeExtensions.clipboard-indicator
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.gsconnect
-    gnomeExtensions.syncthing-indicator
-    
+    gnomeExtensions.dash-to-panel
+    gnomeExtensions.material-shell
     celluloid
   ];
   
@@ -39,5 +36,11 @@
     epiphany
     xterm
   ]);
+  
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
+  programs.ssh.hostKeyAlgorithms = [ "ssh-rsa" ];
 
 } 

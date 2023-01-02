@@ -42,11 +42,10 @@
     hostName = "mike-notebook";
     interfaces.enp1s0.useDHCP = true;
     interfaces.wlan0.useDHCP = true;
-    };
+  };
 
 #### OpenGL drivers
 
-  hardware.opengl.enable = true;
   hardware.opengl.extraPackages = with pkgs; [
     vaapiIntel
     vaapiVdpau

@@ -4,8 +4,8 @@
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.enable = true;
-
-  #networking.networkmanager.wifi.backend = "iwd";
+  
+  programs.kdeconnect.enable = true;
 
   environment.systemPackages = with pkgs; [
     libsForQt5.kate
