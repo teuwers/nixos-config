@@ -14,7 +14,7 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-set $term foot
+set $term alacritty
 
 # Networkmanager
 $mlbind $mod+n exec networkmanager_dmenu

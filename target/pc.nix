@@ -3,7 +3,7 @@
   imports =
     [ 
       <home-manager/nixos>
-      ./wine-ge.nix
+      ../modules/gaming.nix
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -20,6 +20,7 @@
     pulseaudioFull
     bluezFull
     qrcp
+    glxinfo
  ## Network
     firefox-bin
     thunderbird-wayland
@@ -27,6 +28,7 @@
     yandex-disk
     transmission-gtk
     protonvpn-gui
+    qbittorrent
  ## Security
     bitwarden
  ## Vulkan support
@@ -136,7 +138,6 @@
 #           XDG_MISC_DIR = "${config.home.homeDirectory}/Misc";
 #        };
     };
-    xdg.configFile."mpv".source = ../dot_config/mpv;
   };
   
 #### ADB
