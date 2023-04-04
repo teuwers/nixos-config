@@ -3,7 +3,7 @@
   imports =
     [ 
       <home-manager/nixos>
-      ../modules/gaming.nix
+      #../modules/gaming.nix
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
