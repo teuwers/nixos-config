@@ -61,7 +61,7 @@ nix-channel --update
 
 SDA2_UUID=$(blkid -s UUID -o value /dev/sda2)
 SDA3_UUID=$(blkid -s UUID -o value /dev/sda3)
-echo 'boot.initrd = {
+echo '  boot.initrd = {
     luks.devices."crypted-nixos" = { 
       device = "/dev/disk/by-uuid/'$SDA3_UUID'";
       keyFile = "/keyfile-root.bin";
@@ -76,11 +76,7 @@ echo 'boot.initrd = {
       "keyfile-root.bin" = "/etc/secrets/initrd/keyfile-root.bin";
       "keyfile-swap.bin" = "/etc/secrets/initrd/keyfile-swap.bin";
     };
-  };' >> 1.nix
-  
-sed -i '/imports/r 1.nix' /mnt/etc/nixos/hardware-configuration.nix
-sed -i '0,/imports/d' /mnt/etc/nixos/hardware-configuration.nix
-rm 1.nix
+  };' >> /mnt/etc/nixos/hardware-configuration.nix
 
 nixos-install
 
