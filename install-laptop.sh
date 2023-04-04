@@ -20,7 +20,22 @@ parted -s /dev/sda mkpart primary 20.5G 100%
 mkfs.fat -F 32 /dev/sda1
 
 echo "Type passphrase for LUKS: "
-read -s LUKS_PASS
+while IFS = read -p "$PASS_VAR" -r -s -n 1 LETTER
+do
+    # if you press enter then the condition 
+    # is true and it exit the loop
+    if [[ $LETTER == $'\0' ]]
+    then
+        break
+    fi
+    
+    # the letter will store in password variable
+    LUKS_PASS=LUKS_PASS+"$LETTER"
+    
+    # in place of password the asterisk (*) 
+    # will printed
+    PASS_VAR="*"
+done
 
 echo $LUKS_PASS | cryptsetup -q luksFormat --type luks1 -c aes-xts-plain64 -s 256 -h sha512 /dev/sda3 -d -
 echo $LUKS_PASS | cryptsetup -q luksAddKey /dev/sda3 keyfile-root.bin -d -
