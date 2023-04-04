@@ -2,9 +2,9 @@
 
 [ "$UID" -eq 0 ] || exec sudo "$0" "$@"
 
+umount -R /mnt
 cryptsetup -q luksClose crypted-nixos
 cryptsetup -q luksClose crypted-swap
-umount -R /mnt
 
 dd if=/dev/urandom of=./keyfile-root.bin bs=1024 count=4
 dd if=/dev/urandom of=./keyfile-swap.bin bs=1024 count=4
