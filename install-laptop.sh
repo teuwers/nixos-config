@@ -2,27 +2,32 @@
 
 [ "$UID" -eq 0 ] || exec sudo "$0" "$@"
 
+cryptsetup -q luksClose crypted-nixos
+cryptsetup -q luksClose crypted-swap
 umount -R /mnt
 
 dd if=/dev/urandom of=./keyfile-root.bin bs=1024 count=4
 dd if=/dev/urandom of=./keyfile-swap.bin bs=1024 count=4
 
 # Partitioning
-parted /dev/sda mklabel gpt
-parted /dev/sda mkpart fat32 1M 500M
-parted /dev/sda set 1 esp on
+parted -s /dev/sda mklabel gpt
+parted -s /dev/sda mkpart fat32 1M 500M
+parted -s /dev/sda set 1 esp on
 
-parted /dev/sda mkpart primary 500M 20.5G
-parted /dev/sda mkpart primary 20.5G 100%
+parted -s /dev/sda mkpart primary 500M 20.5G
+parted -s /dev/sda mkpart primary 20.5G 100%
 
 mkfs.fat -F 32 /dev/sda1
 
-cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 256 -h sha512 /dev/sda3
-cryptsetup luksAddKey /dev/sda3 keyfile-root.bin
-cryptsetup luksOpen /dev/sda3 crypted-nixos -d keyfile-root.bin
+echo "Type passphrase for LUKS: "
+read LUKS_PASS
 
-cryptsetup luksFormat -c aes-xts-plain64 -s 256 -h sha512 /dev/sda2 -d keyfile-swap.bin
-cryptsetup luksOpen /dev/sda2 crypted-swap -d keyfile-swap.bin
+echo $LUKS_PASS | cryptsetup -q luksFormat --type luks1 -c aes-xts-plain64 -s 256 -h sha512 /dev/sda3 -d -
+echo $LUKS_PASS | cryptsetup -q luksAddKey /dev/sda3 keyfile-root.bin -d -
+cryptsetup -q luksOpen /dev/sda3 crypted-nixos -d keyfile-root.bin 
+
+cryptsetup -q luksFormat -c aes-xts-plain64 -s 256 -h sha512 /dev/sda2 -d keyfile-swap.bin
+cryptsetup -q luksOpen /dev/sda2 crypted-swap -d keyfile-swap.bin
 
 mkfs.ext4 -L root /dev/mapper/crypted-nixos
 mkswap -L swap /dev/mapper/crypted-swap
@@ -52,11 +57,14 @@ echo '{ config, pkgs, ... }:
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 
-truncate -s -1 /mnt/etc/nixos/hardware-configuration.nix
+truncate -s -2 /mnt/etc/nixos/hardware-configuration.nix
+sed -i '/crypted-nixos/d' /mnt/etc/nixos/hardware-configuration.nix
 SDA2_UUID=$(blkid -s UUID -o value /dev/sda2)
-echo '  
+SDA3_UUID=$(blkid -s UUID -o value /dev/sda3)
+echo '
   boot.initrd = {
     luks.devices."crypted-nixos" = { 
+      device = "/dev/disk/by-uuid/'$SDA3_UUID'";
       keyFile = "/keyfile-root.bin";
       allowDiscards = true;
     };
