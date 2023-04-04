@@ -3,7 +3,7 @@
 [ "$UID" -eq 0 ] || exec sudo "$0" "$@"
 
 umount -Rq /mnt
-swapoff
+swapoff /dev/mapper/crypted-swap
 cryptsetup -q luksClose crypted-nixos
 cryptsetup -q luksClose crypted-swap
 
