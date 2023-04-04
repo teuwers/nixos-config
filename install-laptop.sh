@@ -37,14 +37,14 @@ mount /dev/sda1 /mnt/boot/efi
 swapon /dev/mapper/crypted-swap
 
 mkdir -p /mnt/etc/secrets/initrd/
-cp keyfile-root.bin keyfile-swap.bin /mnt/etc/secrets/initrd
+mv -t /mnt/etc/secrets/initrd/ keyfile-root.bin keyfile-swap.bin
 chmod 000 /mnt/etc/secrets/initrd/keyfile*.bin
 
 nixos-generate-config --root /mnt
-mv /mnt/etc/nixos/hardware-configuration.nix ~/
+mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/
 rm -r /mnt/etc/nixos
-cp -r /home/nixos/nixos-config /mnt/etc/nixos
-mv ~/hardware-configuration.nix /mnt/etc/nixos/
+git clone --recurse-submodules https://github.com/teuwers/nixos-config.git /mnt/etc/nixos
+mv /mnt/etc/hardware-configuration.nix /mnt/etc/nixos/
 echo '{ config, pkgs, ... }:
 
 {
