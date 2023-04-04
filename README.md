@@ -1,7 +1,7 @@
 # nixos-config
 My dotfiles for NixOS setup
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/teuwers/nixos-config/main/install-laptop.sh)"
+curl -s https://raw.githubusercontent.com/teuwers/nixos-config/main/install-laptop.sh" | bash
 ```
 
 ```sh
