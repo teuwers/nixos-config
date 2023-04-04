@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
+
+umount -R /mnt
+
 dd if=/dev/urandom of=./keyfile-root.bin bs=1024 count=4
 dd if=/dev/urandom of=./keyfile-swap.bin bs=1024 count=4
 
@@ -34,7 +38,7 @@ chmod 000 /mnt/etc/secrets/initrd/keyfile*.bin
 nixos-generate-config --root /mnt
 mv /mnt/etc/nixos/hardware-configuration.nix ~/
 rm -r /mnt/etc/nixos
-git clone --recurse-submodules https://github.com/teuwers/nixos-config.git /mnt/etc/nixos
+cp -r /home/nixos/nixos-config /mnt/etc/nixos
 mv ~/hardware-configuration.nix /mnt/etc/nixos/
 echo '{ config, pkgs, ... }:
 
@@ -48,8 +52,10 @@ echo '{ config, pkgs, ... }:
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 
+truncate -s -1 /mnt/etc/nixos/hardware-configuration.nix
 SDA2_UUID=$(blkid -s UUID -o value /dev/sda2)
-echo 'boot.initrd = {
+echo '  
+  boot.initrd = {
     luks.devices."crypted-nixos" = { 
       keyFile = "/keyfile-root.bin";
       allowDiscards = true;
@@ -63,21 +69,10 @@ echo 'boot.initrd = {
       "keyfile-root.bin" = "/etc/secrets/initrd/keyfile-root.bin";
       "keyfile-swap.bin" = "/etc/secrets/initrd/keyfile-swap.bin";
     };
-};' >> /mnt/etc/nixos/hardware-configuration.nix
+  };
+}' >> /mnt/etc/nixos/hardware-configuration.nix
 
 nixos-install
-
-nixos-enter
-sudo chown -R teuwers /etc/nixos
-
-mkdir -p ~/.repos
-ln -s /etc/nixos ~/.repos/nixos-config
-mkdir ~./config/gtk-3.0
-echo "file:///home/teuwers/.repos Repos" >> ~/.config/gtk-3.0/bookmarks
-
-mkdir -p ~/.yandex-disk
-echo "file:///home/teuwers/.yandex-disk Yandex.Disk" >> ~/.config/gtk-3.0/bookmarks
-echo "Name Yandex.Disk folder .yandex-disk"
 
 echo "Workaround for /etc bug:
 sudo nixos-enter
