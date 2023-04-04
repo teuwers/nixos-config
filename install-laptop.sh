@@ -20,7 +20,9 @@ parted -s /dev/sda mkpart primary 20.5G 100%
 
 mkfs.fat -F 32 /dev/sda1
 
-read -sp "Type passphrase for LUKS: " LUKS_PASS
+stty -echo
+read -p "Type password for LUKS partition:" LUKS_PASS; echo
+stty echo
 
 echo $LUKS_PASS | cryptsetup -q luksFormat --type luks1 -c aes-xts-plain64 -s 256 -h sha512 /dev/sda3 -d -
 echo $LUKS_PASS | cryptsetup -q luksAddKey /dev/sda3 keyfile-root.bin -d -
