@@ -57,11 +57,9 @@ echo '{ config, pkgs, ... }:
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 
-truncate -s -2 /mnt/etc/nixos/hardware-configuration.nix
-sed -i '/crypted-nixos/d' /mnt/etc/nixos/hardware-configuration.nix
 SDA2_UUID=$(blkid -s UUID -o value /dev/sda2)
 SDA3_UUID=$(blkid -s UUID -o value /dev/sda3)
-echo '
+sed -i "s/crypted-nixos/'
   boot.initrd = {
     luks.devices."crypted-nixos" = { 
       device = "/dev/disk/by-uuid/'$SDA3_UUID'";
@@ -77,12 +75,10 @@ echo '
       "keyfile-root.bin" = "/etc/secrets/initrd/keyfile-root.bin";
       "keyfile-swap.bin" = "/etc/secrets/initrd/keyfile-swap.bin";
     };
-  };
-}' >> /mnt/etc/nixos/hardware-configuration.nix
+  };' /mnt/etc/nixos/hardware-configuration.nix
 
 nixos-install
 
 echo "Workaround for /etc bug:
 sudo nixos-enter
 nixos-install --root /"
-
