@@ -24,7 +24,6 @@
 
 #### Timezone and locale
 
-  time.timeZone = "Europe/Moscow";
   i18n = {
     glibcLocales = pkgs.glibcLocales;
     defaultLocale = "ru_RU.UTF-8";
@@ -35,6 +34,8 @@
   };
   
   services.ntp.enable = true;
+  services.localtimed.enable = true;
+  services.geoclue2.enable = true;
   
 #### SSH
   

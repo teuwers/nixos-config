@@ -3,7 +3,7 @@
   imports =
     [ 
       <home-manager/nixos>
-      #../modules/gaming.nix
+      ../modules/gaming.nix
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -22,13 +22,14 @@
     qrcp
     glxinfo
  ## Network
-    firefox-bin
-    thunderbird-wayland
+    thunderbird
     kotatogram-desktop
     yandex-disk
     transmission-gtk
     protonvpn-gui
     qbittorrent
+    libsForQt5.ktorrent
+    syncthingtray
  ## Security
     bitwarden
  ## Vulkan support
@@ -45,6 +46,15 @@
     pkgs.gitAndTools.gitFull
     winetricks
   ];
+
+  environment.sessionVariables = {
+    MOZ_USE_XINPUT2 = "1";
+  };
+
+  programs.firefox = {
+    enable = true;
+    languagePacks = [ "ru" ];
+  };
   
   services.syncthing = {
     enable = true;
@@ -149,12 +159,21 @@
 
   services.xserver.enable = true;
   programs.xwayland.enable = true;
-  xdg.portal.enable = true;
   
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+  };
+
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+    };
   };
 
 #### Virtualisation

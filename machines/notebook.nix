@@ -7,8 +7,8 @@
 	# Choose WM/DE
       #../sessions/sway.nix
       #../sessions/sway-notebook.nix
-      ../sessions/gnome.nix
-      #../sessions/plasma.nix
+      #../sessions/gnome.nix
+      ../sessions/plasma.nix
     ];
 
   hardware.cpu.intel.updateMicrocode = true;
@@ -26,12 +26,9 @@
     grub = {
       enable = true;
       device = "nodev";
-      version = 2;
       efiSupport = true;
       enableCryptodisk = true;
       useOSProber = true;
-#      trustedBoot.enable = true;
-      trustedBoot.systemHasTPM = "YES_TPM_is_activated";
     };
   };
   time.hardwareClockInLocalTime = true;
