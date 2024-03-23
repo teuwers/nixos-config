@@ -7,6 +7,12 @@
       ./machines/current.nix
     ];
 
+    nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
+
 #### System
 
   system.stateVersion = "22.11";
@@ -124,9 +130,9 @@
         "adb"
         "colored-man-pages"
         "command-not-found"
-        "thefuck"
+ #       "thefuck"
       ];
     };
   };
-  programs.thefuck.enable = true;
+ # programs.thefuck.enable = true;
 }

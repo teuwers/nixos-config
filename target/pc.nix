@@ -18,17 +18,15 @@
     exfatprogs
     ventoy-bin-full
     pulseaudioFull
-    bluezFull
+    bluez
     qrcp
     glxinfo
  ## Network
     thunderbird
     kotatogram-desktop
     yandex-disk
-    transmission-gtk
     protonvpn-gui
     qbittorrent
-    libsForQt5.ktorrent
     syncthingtray
  ## Security
     bitwarden
@@ -38,7 +36,6 @@
     vulkan-extension-layer
  ## Text
     libreoffice-fresh
-    simplenote
     obsidian
  ## Coding
     gcc
