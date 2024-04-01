@@ -44,22 +44,7 @@ mkdir -p /mnt/etc/secrets/initrd/
 mv -t /mnt/etc/secrets/initrd/ keyfile-root.bin keyfile-swap.bin
 chmod 000 /mnt/etc/secrets/initrd/keyfile*.bin
 
-nixos-generate-config --root /mnt
-mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/
-rm -r /mnt/etc/nixos
-git clone --recurse-submodules https://github.com/teuwers/nixos-config.git /mnt/etc/nixos
-mv /mnt/etc/hardware-configuration.nix /mnt/etc/nixos/
-echo '{ config, pkgs, ... }:
-
-{
-  imports =
-    [ 
-	 ./notebook.nix
-    ];
-}' >> /mnt/etc/nixos/machines/current.nix
-
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
+git clone https://github.com/teuwers/nixos-config.git /mnt/etc/nixos
 
 SDA2_UUID=$(blkid -s UUID -o value /dev/sda2)
 SDA3_UUID=$(blkid -s UUID -o value /dev/sda3)
@@ -78,10 +63,12 @@ echo '  boot.initrd = {
       "keyfile-root.bin" = "/etc/secrets/initrd/keyfile-root.bin";
       "keyfile-swap.bin" = "/etc/secrets/initrd/keyfile-swap.bin";
     };
-  };' >> /mnt/etc/nixos/hardware-configuration.nix
+  };' >> /mnt/etc/nixos/hosts/notebook-hardware.nix
 
 nixos-install
 
-echo "Workaround for /etc bug:
+echo "Check UUIDS in /mnt/etc/nixos/hosts/notebook-hardware.nix then
+nixos-install --impure --flake /mnt/etc/nixos#mike-notebook
+Workaround for /etc bug:
 sudo nixos-enter
 nixos-install --root /"
