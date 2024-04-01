@@ -10,6 +10,7 @@ in
   
   environment.systemPackages = [ 
     nix-gaming.packages.x86_64-linux.wine-ge
+    winetricks
   ];
 
   services.pipewire = {

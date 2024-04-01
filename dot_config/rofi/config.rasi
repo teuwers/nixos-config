@@ -1,9 +1,0 @@
-/* Rofi config file */
-configuration {
-    lines: 12;
-    font: "Noto Sans 12";
-    show-icons: true;
-    display-window: "Window";
-    display-drun: "Search";
-}
-@theme "oxide"

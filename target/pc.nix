@@ -41,8 +41,9 @@
     gcc
     clang
     pkgs.gitAndTools.gitFull
-    winetricks
   ];
+
+  services.emacs.enable = true;
 
   environment.sessionVariables = {
     MOZ_USE_XINPUT2 = "1";
