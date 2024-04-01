@@ -15,6 +15,7 @@
     , nixpkgs
     , home-manager
     , nur
+    , ...
   }: {
     nixosConfigurations = {
       mike-notebook = nixpkgs.lib.nixosSystem {
