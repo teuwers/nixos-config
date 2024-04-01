@@ -21,6 +21,8 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/notebook.nix
+          home-manager.nixosModules.home-manager
+          nur.nixosModules.nur
         ];
       };
       mike-desktop = nixpkgs.lib.nixosSystem {
