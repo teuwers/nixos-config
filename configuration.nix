@@ -1,16 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
 
 #### System
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
   services.fwupd.enable = true;
   nixpkgs.config.allowUnfree = true;
   
