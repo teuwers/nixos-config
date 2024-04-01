@@ -19,6 +19,7 @@
     nixosConfigurations = {
       mike-notebook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs.inputs = inputs;
         modules = [
           (import ./hosts/notebook.nix inputs)
         ];
