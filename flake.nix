@@ -15,18 +15,20 @@
     , nixpkgs
     , home-manager
     , nur
-  }: {
+  }@inputs: {
     nixosConfigurations = {
       mike-notebook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
         modules = [
-          hosts/notebook.nix
+          ./hosts/notebook.nix
         ];
       };
       mike-desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
         modules = [
-          hosts/desktop.nix
+          ./hosts/desktop.nix
         ];
       };
     };

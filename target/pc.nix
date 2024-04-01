@@ -120,7 +120,7 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.users.teuwers = { pkgs, ... }: {
-    home.stateVersion = "22.11";
+    home.stateVersion = "23.11";
     programs.git = {
       enable = true;
       userName  = "teuwers";
