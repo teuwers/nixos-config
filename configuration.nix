@@ -128,9 +128,9 @@
         "adb"
         "colored-man-pages"
         "command-not-found"
- #       "thefuck"
+        "thefuck"
       ];
     };
   };
- # programs.thefuck.enable = true;
+  programs.thefuck.enable = true;
 }
