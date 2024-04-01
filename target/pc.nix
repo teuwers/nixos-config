@@ -1,7 +1,8 @@
-{ config, pkgs, home-manager, ... }:
+{ config, pkgs, ... }:
 {
   imports =
     [ 
+      <home-manager/nixos>
       ../modules/gaming.nix
     ];
 
