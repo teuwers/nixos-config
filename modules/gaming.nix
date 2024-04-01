@@ -9,8 +9,8 @@
   environment.systemPackages = with pkgs; [
     xboxdrv
     prismlauncher
-    openjdk17
-    papermcServers.papermc-1_20_4
+    zulu17
+    jre8
   ];
   
   programs.steam = {
@@ -40,22 +40,4 @@
 
   services.logmein-hamachi.enable = true;
   programs.haguichi.enable = true;
-
-  services.minecraft-server = {
-    enable = true;
-    #package = minecraft-server_1_20_4;
-    eula = true;
-    dataDir = "/home/teuwers/mc_server_1.20.4/";
-    serverProperties = {
-      server-port = 25565;
-      difficulty = 3;
-      gamemode = 1;
-      max-players = 5;
-      motd = "NixOS Minecraft server!";
-      white-list = false;
-      #enable-rcon = true;
-      #"rcon.password" = "hunter2";
-    };
-    openFirewall = true;
-  };
 }

@@ -81,10 +81,8 @@
 #### Fonts
 
   fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [ 
-      (nerdfonts.override { fonts = [ "Noto" ]; })
-    ];
+    enableDefaultPackages = true;
+    packages = [ pkgs.nerdfonts ];
     fontconfig = {
       defaultFonts = {
         serif = [ "NotoSerif Nerd Font Regular" ];
