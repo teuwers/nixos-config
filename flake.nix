@@ -22,6 +22,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/notebook.nix
+          inputs.home-manager.nixosModules.home-manager
         ];
       };
       mike-desktop = nixpkgs.lib.nixosSystem {
