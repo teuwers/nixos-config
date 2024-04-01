@@ -85,9 +85,9 @@
     packages = [ pkgs.nerdfonts ];
     fontconfig = {
       defaultFonts = {
-        serif = [ "NotoSerif Nerd Font Regular" ];
-        sansSerif = [ "NotoSans Nerd Font Regular" ];
-        monospace = [ "NotoSansMono Nerd Font Mono Regular" ];
+        serif = [ "NotoSerif Nerd Font" ];
+        sansSerif = [ "NotoSans Nerd Font" ];
+        monospace = [ "NotoSansMono Nerd Font Mono" ];
       };
     };
   };
@@ -96,7 +96,8 @@
 
   console = {
     earlySetup = true;
-    font = "LatArCyrHeb-16";
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-116n.psf.gz";
+    packages = with pkgs; [ terminus_font ];
     keyMap = "ru";
   };
 
