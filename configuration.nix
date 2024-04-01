@@ -4,13 +4,13 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      ./machines/current.nix
     ];
 
-    nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-      inherit pkgs;
-    };
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
 
 #### System
@@ -23,6 +23,7 @@
 
   nix.gc.automatic = true;
   nix.gc.options = "--delete-older-than 7d";
+  nix.settings.auto-optimise-store = true;
   
 #### Autoupgrade
 
