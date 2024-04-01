@@ -15,8 +15,9 @@
     , nixpkgs
     , home-manager
     , nur
-    , ...
-  }: {
+  }@ inputs: let
+    inherit (self) outputs;
+  in {
     nixosConfigurations = {
       mike-notebook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
