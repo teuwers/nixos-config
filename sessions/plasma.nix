@@ -24,6 +24,6 @@
     kdePackages.kdialog
     kdePackages.plasma-integration
     kdePackages.plasma-browser-integration
-    pkgs.nur.repos.baduhai.koi
+    config.nur.repos.baduhai.koi
   ];  
 }

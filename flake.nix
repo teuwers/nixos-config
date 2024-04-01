@@ -6,7 +6,6 @@
     substituters = [
       "https://cache.nixos.org/"
     ];
-
     extra-substituters = [
       "https://nix-community.cachix.org"
     ];
@@ -29,7 +28,7 @@
     , nixpkgs
     , home-manager
     , nur
-  }@inputs: {
+  }: {
     nixosConfigurations = {
       mike-notebook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
