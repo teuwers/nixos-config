@@ -10,7 +10,7 @@
 
   outputs = {
     self
-    , nixpkgs,
+    , nixpkgs
     , home-manager
     , nur
   }: {
