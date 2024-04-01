@@ -1,4 +1,4 @@
-{ config, pkgs, nur, ... }:
+{ config, pkgs, ... }:
 
 {
   services.desktopManager.plasma6 = {
@@ -24,6 +24,6 @@
     kdePackages.kdialog
     kdePackages.plasma-integration
     kdePackages.plasma-browser-integration
-    nur.repos.baduhai.koi
+    pkgs.nur.repos.baduhai.koi
   ];  
 }
