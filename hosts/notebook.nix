@@ -4,6 +4,7 @@
   imports =
     [ 
       ../configuration.nix
+      ./notebook-hardware.nix
       ../target/pc.nix
 	# Choose WM/DE
       #../sessions/gnome.nix
