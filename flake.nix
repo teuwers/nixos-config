@@ -9,22 +9,22 @@
   };
 
   outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    nur
+    self
+    , nixpkgs,
+    , home-manager
+    , nur
   }: {
     nixosConfigurations = {
       mike-notebook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/notebook.nix
+          hosts/notebook.nix
         ];
       };
       mike-desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/desktop.nix
+          hosts/desktop.nix
         ];
       };
     };
