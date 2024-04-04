@@ -192,5 +192,6 @@
     enable = true;
     workgroup = "users";
     discovery = true;
+    openFirewall = true;
   };
 }
