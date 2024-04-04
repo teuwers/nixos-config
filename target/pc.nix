@@ -190,7 +190,7 @@
 
   services.miniupnpd = {
     enable = true;
-    natpmp = true;
+    #natpmp = true;
     upnp = true;
     internalIPs = [
       "enp1s0"
