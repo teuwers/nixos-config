@@ -46,6 +46,7 @@
 
   environment.sessionVariables = {
     MOZ_USE_XINPUT2 = "1";
+    MOZ_ENABLE_WAYLAND = "1";
   };
 
   programs.firefox = {
@@ -184,4 +185,12 @@
   
 #  virtualisation.libvirtd.enable = true;
 #  users.extraGroups.libvirtd.members = [ "teuwers" ];
+
+#### Samba
+
+  services.samba-wsdd = {
+    enable = true;
+    workgroup = "users";
+    discovery = true;
+  };
 }

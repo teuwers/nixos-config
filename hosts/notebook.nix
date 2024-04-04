@@ -48,14 +48,4 @@
     vaapiVdpau
     libvdpau-va-gl
   ];
-  
-#### MPV config
-  
-  home-manager.users.teuwers = { pkgs, ... }: {
-    home.packages = [
-      (pkgs.writeShellScriptBin "mpv" ''
-      exec ${pkgs.mpv}/bin/mpv --profile=M60 "$@"
-      '')
-    ];
-  };
 }
