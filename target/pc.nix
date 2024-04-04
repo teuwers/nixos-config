@@ -188,14 +188,18 @@
 
 #### UPnP
 
-  services.miniupnpd = {
+  services.mediatomb = {
     enable = true;
-    #natpmp = true;
-    upnp = true;
-    internalIPs = [
-      "enp1s0"
-      "wlan0"
-      "lo"
+    group = "users";
+    user = "teuwers";
+    dataDir = "/home/teuwers/.local/share/gerbera";
+    mediaDirectories =
+    [
+      {
+        hidden-files = false;
+        path = "/home/teuwers/Videos";
+        recursive = true;
+      }
     ];
   };
 }
