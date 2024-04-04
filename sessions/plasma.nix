@@ -9,7 +9,6 @@
   services.xserver.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    package = pkgs.kdePackages.sddm;
   };
   
   programs.kdeconnect.enable = true;
@@ -33,7 +32,7 @@
     kdePackages.kdav
     kdePackages.kmail
     kdePackages.kcalc
-    kdePackages.ktouch
+#    kdePackages.ktouch
     kdePackages.kontact
     kdePackages.skanpage
     kdePackages.kdenlive
